@@ -26,8 +26,8 @@
         @auth
             <nav class="navbar navbar-expand-md navbar-dark shadow py-0" style="background-color:darkcyan">
                 <div class="container">
-                    <a class="navbar-brand mr-4" href="{{ url('/rezervari') }}">
-                        {{ config('app.name', 'Transport Corsica') }}
+                    <a class="navbar-brand mr-5" href="{{ url('/piese') }}">
+                        {{ config('app.name', 'Radio Dada') }}
                         {{-- <img src="{{ asset('images/logo.png') }}" height="40" class="border border-dark rounded-pill mr-4"> --}}
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -39,43 +39,25 @@
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active mr-4">
-                                <a class="nav-link" href="{{ route('rezervari.index') }}">
-                                    <i class="fas fa-address-card mr-1"></i>Rezervări
+                                <a class="nav-link" href="{{ route('piese.index') }}">
+                                    <i class="fas fa-music mr-1"></i>Piese
                                 </a>
                             </li>
-                            <li class="nav-item active mr-4 dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-book mr-1"></i>Rapoarte Călători
+                            <li class="nav-item active mr-4">
+                                <a class="nav-link" href="/piese/categorie/Top">
+                                    <i class="fas fa-star mr-1"></i>Top
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/rapoarte/calatori/plecare">Rapoarte plecare</a>
-                                    <a class="dropdown-item" href="/rapoarte/calatori/sosire">Rapoarte sosire</a>
-                                    {{-- <a class="dropdown-item" href="#">Raport Retur</a> --}}
-                                </div>
                             </li>
-                            <li class="nav-item active mr-4 dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-book mr-1"></i>Rapoarte Bagaje
+                            <li class="nav-item active mr-4">
+                                <a class="nav-link" href="/piese/categorie/Propunere">
+                                    <i class="fas fa-list-alt mr-1"></i>Propuneri
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/rapoarte/bagaje/plecare">Rapoarte plecare</a>
-                                    <a class="dropdown-item" href="/rapoarte/bagaje/sosire">Rapoarte sosire</a>
-                                    {{-- <a class="dropdown-item" href="#">Raport Retur</a> --}}
-                                </div>
                             </li>
-                    @if ((auth()->user()->role == 'superadmin') || (auth()->user()->role == 'administrator'))
-                            <li class="nav-item active mr-4 dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bars mr-1"></i>Utile
+                            <li class="nav-item active mr-4">
+                                <a class="nav-link" href="/piese/categorie/Asteapta aprobare">
+                                    <i class="fas fa-pencil-alt mr-1"></i>Propuneri de aprobat
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('clienti-neseriosi.index') }}">Clienți neserioși</a>
-                                    <a class="dropdown-item" href="{{ route('mesaje-trimise-sms.index') }}">SMS trimise</a>
-                                    <a class="dropdown-item" href="{{ route('facturi.index') }}">Facturi</a>
-                                    {{-- <a class="dropdown-item" href="#">Raport Retur</a> --}}
-                                </div>
                             </li>
-                    @endif
                         </ul>
 
                         <!-- Right Side Of Navbar -->

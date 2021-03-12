@@ -27,6 +27,20 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
+if (document.querySelector('#app')) {
+    const app = new Vue({
+        el: '#app',
+    });
+}
+
+
+if (document.querySelector('#app1')) {
+    const app1 = new Vue({
+        el: '#app1',
+        data: {
+            piesa: 'df',
+            trupa: 'df',
+            titlu: 'df'
+        },
+    });
+}
