@@ -1899,21 +1899,28 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-if (document.querySelector('#app')) {
-  var app = new Vue({
-    el: '#app'
-  });
-}
+// if (document.querySelector('#app')) {
+//     const app = new Vue({
+//         el: '#app',
+//     });
+// }
 
 if (document.querySelector('#app1')) {
   var app1 = new Vue({
     el: '#app1',
     data: {
-      piesa: 'df',
-      trupa: 'df',
-      titlu: 'df'
-    }
+      piesa: '',
+      trupa: '',
+      titlu: ''
+    } // methods: {
+    //     trupa_func(trupa) {
+    //         this.trupa = trupa;
+    //     },
+    //     titlu_func: function (titlu) {
+    //         this.titlu = titlu;
+    //     }
+    // }
+
   });
 }
 

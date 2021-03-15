@@ -18,7 +18,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="voteazaPiesa" id="voteazaPiesa{{ $piesa->id }}" value="{{ $piesa->id }}"
-                                            {{-- v-on:click="trupa = '{{ $piesa->artist }}';titlu = '{{ $piesa->titlu }}'" --}}
+                                            v-on:click="trupa = '{{ addslashes($piesa->artist) }}';titlu = '{{ addslashes($piesa->titlu) }}'"
                                         >
                                         <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
                                             {{ $loop->index }}. {{ $piesa->artist }} - {{ $piesa->titlu }} - {{ $piesa->voturi }} 
@@ -36,8 +36,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="voteazaPiesa" id="voteazaPiesa{{ $piesa->id }}" value="{{ $piesa->id }}"
-                                            {{-- v-on:click="trupa = '{!! json_encode($piesa->artist) !!}';titlu = ''" --}}
-                                            v-on:click="trupa = 'a';titlu = 'b'"
+                                            v-on:click="trupa = '{{ addslashes($piesa->artist) }}';titlu = '{{ addslashes($piesa->titlu) }}';"
                                         >
                                         <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
                                             {{ $loop->index }}. {{ $piesa->artist }} - {{ $piesa->titlu }} - {{ $piesa->voturi }} 
@@ -70,10 +69,10 @@
             </div>
             <div class="col-lg-6">
                 <h1>
-                    {{-- {{ trupa }} --}}
+                    @{{ trupa }}
                 </h1>
                 <h1>
-                    {{-- {{ titlu }} --}}
+                    @{{ titlu }}
                 </h1>
             </div>
         </div>

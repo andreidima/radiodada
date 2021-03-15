@@ -17,9 +17,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });    
+    // Route::get('/', function () {
+    //     return view('piese');
+    // });    
+    
+    Route::redirect('/', 'piese');
 
     Route::resource('piese', App\Http\Controllers\PiesaController::class,  ['parameters' => ['piese' => 'piesa']]);
 
