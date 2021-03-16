@@ -24,12 +24,14 @@ class VoteazaPropuneController extends Controller
     {
         switch ($request->input('action')) {
             case 'Voteaza':
-                // Save model
+                echo 'votat';
                 break;
 
             case 'Propunere':
-                // Preview model
+                echo 'propus';
                 break;
         }
+        echo 'final';
+        dd($request, $request->input('action'));
     }
 }

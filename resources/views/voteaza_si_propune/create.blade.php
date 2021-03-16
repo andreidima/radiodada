@@ -9,7 +9,16 @@
 
         <div class="row" id="app1">
             <div class="col-lg-6">
-                <form action='votare.php' method='post'>
+                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
+                @csrf
+                            <button type="submit" class="btn btn-danger border border-dark rounded-pill">
+                                Test
+                            </button>
+
+                </form>
+                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
+                @csrf
+
                     <div class="form-row">
                         <div class="col-lg-12 pb-2 justify-content-center">
                             <h3 class="text-center">Top</h3>
@@ -46,14 +55,15 @@
                         @endforeach
 
                         <div class="col-lg-12 mb-3 py-3 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-danger border border-dark rounded-pill" value="Voteaza" name="Votează">
+                            <button type="submit" class="btn btn-danger border border-dark rounded-pill" name="action" value="Voteaza">
                                 Votează
                             </button>
                         </div>
                     </div>
                 </form>
 
-                <form action='votare.php' method='post'>
+                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
+                @csrf
                     <div class="form-row">
                         <div class="col-lg-12 justify-content-center">
                             <label for="PropunereNoua" class="form-label">
@@ -62,7 +72,7 @@
                             <input type="text" class="form-control"  name="Propunere" id="Propunere" aria-describedby="propunere">
                         </div>
                         <div class="col-lg-12 mb-3 py-3 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-danger border border-dark rounded-pill" value="Propune" name="Propune">Propune</button>
+                            <button type="submit" class="btn btn-danger border border-dark rounded-pill"  name="action" value="Propunere">Propune</button>
                         </div>
                     </div>
                 </form>

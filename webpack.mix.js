@@ -12,5 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .sourceMaps() // adaugat pentru popper.js.map
     .vue()
     .sass('resources/sass/app.scss', 'public/css');

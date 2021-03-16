@@ -27,7 +27,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/piese/categorie/{categorie}', [App\Http\Controllers\PiesaController::class, 'index']);
 
-    Route::get('/voteaza-si-propune', [App\Http\Controllers\VoteazaPropuneController::class, 'create']);
-    Route::post('/voteaza-si-propune', [App\Http\Controllers\VoteazaPropuneController::class, 'store']);
+    Route::resource('voteaza-si-propune', App\Http\Controllers\VoteazaPropuneController::class)->only([
+        'create', 'store'
+    ]);;
+    // Route::post('/voteaza-si-propune', [App\Http\Controllers\VoteazaPropuneController::class, 'store']);
 });
 
