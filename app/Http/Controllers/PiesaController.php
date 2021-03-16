@@ -33,7 +33,6 @@ class PiesaController extends Controller
             ->orderByDesc('voturi')
             // ->latest()
             ->simplePaginate(25);
-            
         return view('piese.index', compact('piese', 'search_titlu', 'search_artist'));
     }
 
