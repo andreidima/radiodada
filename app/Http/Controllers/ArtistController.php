@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Piesa;
+use App\Models\Artist;
+use App\Models\Imagine;
 
-class PiesaController extends Controller
+use Illuminate\Support\Facades\Storage;
+
+class ArtistController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,25 +18,13 @@ class PiesaController extends Controller
      */
     public function index($categorie = null)
     {
-        $search_titlu = \Request::get('search_titlu');
-        $search_artist = \Request::get('search_artist');
-        $piese = Piesa::
-            when($search_titlu, function ($query, $search_titlu) {
-                return $query->where('titlu', 'like', '%' . $search_titlu . '%');
+        $search_nume = \Request::get('search_nume');
+        $artisti = Artist::
+            when($search_nume, function ($query, $search_nume) {
+                return $query->where('nume', 'like', '%' . $search_nume . '%');
             })
-            ->when($search_artist, function ($query, $search_artist) {
-                return $query->where('artist', 'like', '%' . $search_artist . '%');
-            })
-            ->when($categorie, function ($query, $categorie) {
-                return $query->where('categorie', 'like', '%' . $categorie . '%');
-            })
-            ->when(!$categorie, function ($query, $categorie) {
-                return $query->where('categorie', '<>', 'Asteapta aprobare');
-            })
-            ->orderByDesc('voturi')
-            // ->latest()
             ->simplePaginate(25);
-        return view('piese.index', compact('piese', 'search_titlu', 'search_artist'));
+        return view('artisti.index', compact('artisti', 'search_nume'));
     }
 
     /**
@@ -43,7 +34,7 @@ class PiesaController extends Controller
      */
     public function create()
     {
-        return view('piese.create');
+        return view('artisti.create');
     }
 
     /**
@@ -54,20 +45,34 @@ class PiesaController extends Controller
      */
     public function store(Request $request)
     {
-        $piesa = Piesa::create($this->validateRequest($request));
+        $this->validateRequest();
+        $artist = Artist::create($request->except(['imagine']));
 
-        return redirect('/piese')->with('status', 'Piesa „' . $piesa->titlu . '” a fost adăugată cu succes!');
+        if($request->file()) {
+            $nume = $request->file('imagine')->getClientOriginalName();
+            $cale = 'uploads/imagini/artisti/' . $artist->id . '/';
+            $request->file('imagine')->move(public_path() . '/' . $cale, $nume);
+
+            $imagine = new Imagine;
+            $imagine->referinta_id = $artist->id;
+            $imagine->referinta_categorie = 'artisti';
+            $imagine->imagine_nume = $nume;
+            $imagine->imagine_cale = $cale;
+            $imagine->save();
+        }
+
+        return redirect('/artisti')->with('status', 'Artistul „' . $artist->nume . '” a fost adăugat cu succes!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Piesa  $piesa
+     * @param  \App\Models\Artist  $piesa
      * @return \Illuminate\Http\Response
      */
-    public function show(Piesa $piesa)
+    public function show(Artist $artist)
     {
-        //
+        return view('artisti.show', compact('artist'));
     }
 
     /**
@@ -112,12 +117,13 @@ class PiesaController extends Controller
      *
      * @return array
      */
-    protected function validateRequest(Request $request)
+    protected function validateRequest()
     {
         return request()->validate([
-            'titlu' => ['required', 'max:250'],
-            'artist' => ['nullable', 'max:250'],
-            'categorie' => ['required', 'max:250']
+            'nume' => 'required|max:250',
+            'imagine' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+            'link' => 'nullable|max:250',
+            'nume' => 'nullable|max:250',
         ]);
     }
 }

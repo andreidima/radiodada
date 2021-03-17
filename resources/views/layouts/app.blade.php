@@ -44,6 +44,11 @@
                                 </a>
                             </li>
                             <li class="nav-item active mr-4">
+                                <a class="nav-link" href="{{ route('artisti.index') }}">
+                                    <i class="fas fa-users mr-1"></i>Artiști
+                                </a>
+                            </li>
+                            <li class="nav-item active mr-4">
                                 <a class="nav-link" href="/piese/categorie/Top">
                                     <i class="fas fa-star mr-1"></i>Top
                                 </a>
