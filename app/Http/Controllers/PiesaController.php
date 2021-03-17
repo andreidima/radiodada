@@ -122,6 +122,8 @@ class PiesaController extends Controller
         return request()->validate([
             'nume' => 'required|max:250',
             'artist_id' => 'nullable',
+            'link_youtube' => 'nullable|max:250',
+            'link_interviu' => 'nullable|max:250',
             'categorie' => 'required|max:250'
         ]);
     }

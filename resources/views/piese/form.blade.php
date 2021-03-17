@@ -13,8 +13,7 @@
                     value="{{ old('nume', $piesa->nume) }}"
                     required> 
             </div>   
-            <div class="form-group col-lg-12 ">  
-                
+            <div class="form-group col-lg-12 ">                  
                     <label for="artist_id" class="mb-0 pl-3">Artist:</label>
                     <div class="">    
                         <select name="artist_id" 
@@ -29,7 +28,26 @@
                             @endforeach
                         </select>
                     </div>
-
+            </div>                       
+            <div class="form-group col-lg-12">  
+                <label for="link_youtube" class="mb-0 pl-3">Link youtube:</label>                                      
+                <input 
+                    type="text" 
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('link_youtube') ? 'is-invalid' : '' }}" 
+                    name="link_youtube" 
+                    placeholder="" 
+                    value="{{ old('link_youtube', $piesa->link_youtube) }}"
+                    required> 
+            </div>                       
+            <div class="form-group col-lg-12">  
+                <label for="link_interviu" class="mb-0 pl-3">Link interviu:</label>                                      
+                <input 
+                    type="text" 
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('link_interviu') ? 'is-invalid' : '' }}" 
+                    name="link_interviu" 
+                    placeholder="" 
+                    value="{{ old('link_interviu', $piesa->link_interviu) }}"
+                    required> 
             </div>   
             <div class="form-group col-lg-12 ">  
                 <label for="categorie" class="mb-0 pl-3">Categorie:*</label>                                     
