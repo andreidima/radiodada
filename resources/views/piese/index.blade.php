@@ -10,10 +10,10 @@
                 <form class="needs-validation" novalidate method="GET" action="{{ route('piese.index') }}">
                     @csrf
                     <div class="row mb-1 input-group custom-search-form justify-content-center">
-                        <input type="text" class="form-control form-control-sm col-md-4 mr-1 border rounded-pill" id="search_titlu" name="search_titlu" placeholder="Titlu" autofocus
-                                value="{{ $search_titlu }}">
-                        <input type="text" class="form-control form-control-sm col-md-4 mr-1 border rounded-pill" id="search_artist" name="search_artist" placeholder="Artist" autofocus
-                                value="{{ $search_artist }}">
+                        <input type="text" class="form-control form-control-sm col-md-8 mr-1 border rounded-pill" id="search_nume" name="search_nume" placeholder="Nume" autofocus
+                                value="{{ $search_nume }}">
+                        {{-- <input type="text" class="form-control form-control-sm col-md-4 mr-1 border rounded-pill" id="search_artist" name="search_artist" placeholder="Artist" autofocus
+                                value="{{ $search_artist }}"> --}}
                     </div>
                     <div class="row input-group custom-search-form justify-content-center">
                         <button class="btn btn-sm btn-primary col-md-4 mr-1 border border-dark rounded-pill" type="submit">
@@ -41,7 +41,7 @@
                     <thead class="text-white rounded" style="background-color:#e66800;">
                         <tr class="" style="padding:2rem">
                             <th>Nr. Crt.</th>
-                            <th>Titlu</th>
+                            <th>Nume</th>
                             <th>Artist</th>
                             <th>Categorie</th>
                             <th>Voturi</th>
@@ -55,10 +55,10 @@
                                     {{ ($piese ->currentpage()-1) * $piese ->perpage() + $loop->index + 1 }}
                                 </td>
                                 <td>
-                                    <b>{{ $piesa->titlu }}</b>
+                                    <b>{{ $piesa->nume }}</b>
                                 </td>
                                 <td>
-                                    {{ $piesa->artist }}
+                                    {{ $piesa->artist->nume ?? '' }}
                                 </td>
                                 <td>
                                     {{ $piesa->categorie }}
@@ -67,6 +67,11 @@
                                     {{ $piesa->voturi }}
                                 </td>
                                 <td class="d-flex justify-content-end">
+                                    <a href="{{ $piesa->path() }}"
+                                        class="flex mr-1"    
+                                    >
+                                        <span class="badge badge-success">Vizualizează</span>
+                                    </a>
                                     <a href="{{ $piesa->path() }}/modifica"
                                         class="flex mr-1"    
                                     >

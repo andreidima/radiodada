@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Piesa;
+use App\Models\Artist;
 
 class PiesaController extends Controller
 {
@@ -15,25 +16,25 @@ class PiesaController extends Controller
      */
     public function index($categorie = null)
     {
-        $search_titlu = \Request::get('search_titlu');
-        $search_artist = \Request::get('search_artist');
+        $search_nume = \Request::get('search_nume');
+        // $search_artist = \Request::get('search_artist');
         $piese = Piesa::
-            when($search_titlu, function ($query, $search_titlu) {
-                return $query->where('titlu', 'like', '%' . $search_titlu . '%');
+            when($search_nume, function ($query, $search_nume) {
+                return $query->where('nume', 'like', '%' . $search_nume . '%');
             })
-            ->when($search_artist, function ($query, $search_artist) {
-                return $query->where('artist', 'like', '%' . $search_artist . '%');
-            })
+            // ->when($search_artist, function ($query, $search_artist) {
+            //     return $query->where('artist', 'like', '%' . $search_artist . '%');
+            // })
             ->when($categorie, function ($query, $categorie) {
                 return $query->where('categorie', 'like', '%' . $categorie . '%');
             })
             ->when(!$categorie, function ($query, $categorie) {
                 return $query->where('categorie', '<>', 'Asteapta aprobare');
             })
-            ->orderByDesc('voturi')
-            // ->latest()
+            // ->orderByDesc('voturi')
+            ->latest()
             ->simplePaginate(25);
-        return view('piese.index', compact('piese', 'search_titlu', 'search_artist'));
+        return view('piese.index', compact('piese', 'search_nume'));
     }
 
     /**
@@ -43,7 +44,9 @@ class PiesaController extends Controller
      */
     public function create()
     {
-        return view('piese.create');
+        $artisti = Artist::orderBy('nume')->get();
+
+        return view('piese.create', compact('artisti'));
     }
 
     /**
@@ -67,7 +70,7 @@ class PiesaController extends Controller
      */
     public function show(Piesa $piesa)
     {
-        //
+        return view('piese.show', compact('piesa'));
     }
 
     /**
@@ -78,7 +81,9 @@ class PiesaController extends Controller
      */
     public function edit(Piesa $piesa)
     {
-        return view('piese.edit', compact('piesa'));
+        $artisti = Artist::orderBy('nume')->get();
+
+        return view('piese.edit', compact('piesa', 'artisti'));
     }
 
     /**
@@ -92,7 +97,7 @@ class PiesaController extends Controller
     {
         $piesa->update($this->validateRequest($request));
 
-        return redirect('/piese')->with('status', 'Piesa "' . $piesa->titlu . '" a fost modificată cu succes!');
+        return redirect('/piese')->with('status', 'Piesa "' . $piesa->nume . '" a fost modificată cu succes!');
     }
 
     /**
@@ -115,9 +120,9 @@ class PiesaController extends Controller
     protected function validateRequest(Request $request)
     {
         return request()->validate([
-            'titlu' => ['required', 'max:250'],
-            'artist' => ['nullable', 'max:250'],
-            'categorie' => ['required', 'max:250']
+            'nume' => 'required|max:250',
+            'artist_id' => 'nullable',
+            'categorie' => 'required|max:250'
         ]);
     }
 }

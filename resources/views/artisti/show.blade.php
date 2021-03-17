@@ -32,9 +32,11 @@
                                     Imagine
                                 </td>
                                 <td>
-                                    <a href="{{ env('APP_URL') . $artist->imagine->imagine_cale . $artist->imagine->imagine_nume }}" target="_blank">
-                                        <img src="{{ env('APP_URL') . $artist->imagine->imagine_cale . $artist->imagine->imagine_nume }}" alt="" width="100%">
-                                    </a>
+                                    @if ($artist->imagine)
+                                        <a href="{{ env('APP_URL') . $artist->imagine->imagine_cale . $artist->imagine->imagine_nume }}" target="_blank">
+                                            <img src="{{ env('APP_URL') . $artist->imagine->imagine_cale . $artist->imagine->imagine_nume }}" alt="" width="100%">
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                             <tr>
@@ -58,7 +60,7 @@
                                        
                     <div class="form-row mb-2 px-2">                                    
                         <div class="col-lg-12 d-flex justify-content-center">  
-                            <a class="btn btn-primary btn-sm rounded-pill" href="/service/clienti">Pagină Clienți</a> 
+                            <a class="btn btn-primary btn-sm rounded-pill" href="/artisti">Pagină Artiști</a> 
                         </div>
                     </div>
 

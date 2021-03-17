@@ -14,7 +14,14 @@
                     required> 
             </div>   
             <div class="form-group col-lg-12">
-                <label for="imagine" class="mb-0 pl-3">Adaugă imagine:</label>
+                <label for="imagine" class="mb-0 pl-3">
+                    @if ($artist->imagine)
+                        Schimbă imaginea actuală: {{ $artist->imagine->imagine_nume }}
+                    @else
+                        Adaugă imagine:
+                    @endif
+
+                </label>
                 <input type="file" class="form-control-file" name="imagine" id="imagine">
             </div>                                   
             <div class="form-group col-lg-12">  

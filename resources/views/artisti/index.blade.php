@@ -10,7 +10,7 @@
                 <form class="needs-validation" novalidate method="GET" action="{{ route('artisti.index') }}">
                     @csrf
                     <div class="row mb-1 input-group custom-search-form justify-content-center">
-                        <input type="text" class="form-control form-control-sm col-md-4 mr-1 border rounded-pill" id="search_nume" name="search_nume" placeholder="Titlu" autofocus
+                        <input type="text" class="form-control form-control-sm col-md-8 mr-1 border rounded-pill" id="search_nume" name="search_nume" placeholder="Nume" autofocus
                                 value="{{ $search_nume }}">
                     </div>
                     <div class="row input-group custom-search-form justify-content-center">

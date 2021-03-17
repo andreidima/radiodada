@@ -27,6 +27,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('artisti', App\Http\Controllers\ArtistController::class,  ['parameters' => ['artisti' => 'artist']]);
 
+    Route::resource('propuneri', App\Http\Controllers\PropunereController::class,  ['parameters' => ['propuneri' => 'propunere']]);
+
     Route::get('/piese/categorie/{categorie}', [App\Http\Controllers\PiesaController::class, 'index']);
 
     Route::resource('voteaza-si-propune', App\Http\Controllers\VoteazaPropuneController::class)->only([

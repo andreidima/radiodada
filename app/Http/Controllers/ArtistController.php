@@ -23,6 +23,7 @@ class ArtistController extends Controller
             when($search_nume, function ($query, $search_nume) {
                 return $query->where('nume', 'like', '%' . $search_nume . '%');
             })
+            ->latest()
             ->simplePaginate(25);
         return view('artisti.index', compact('artisti', 'search_nume'));
     }
@@ -50,8 +51,8 @@ class ArtistController extends Controller
 
         if($request->file()) {
             $nume = $request->file('imagine')->getClientOriginalName();
-            $cale = 'uploads/imagini/artisti/' . $artist->id . '/';
-            $request->file('imagine')->move(public_path() . '/' . $cale, $nume);
+            $cale = '/uploads/imagini/artisti/' . $artist->id . '/';
+            $request->file('imagine')->move(public_path() . $cale, $nume);
 
             $imagine = new Imagine;
             $imagine->referinta_id = $artist->id;
@@ -81,35 +82,81 @@ class ArtistController extends Controller
      * @param  \App\Models\Piesa  $piesa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Piesa $piesa)
+    public function edit(Artist $artist)
     {
-        return view('piese.edit', compact('piesa'));
+        return view('artisti.edit', compact('artist'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Piesa  $piesa
+     * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Piesa $piesa)
+    public function update(Request $request, Artist $artist)
     {
-        $piesa->update($this->validateRequest($request));
+        // dd($artist, $request);
+        $this->validateRequest();
+        $artist->update($request->except(['imagine']));     
 
-        return redirect('/piese')->with('status', 'Piesa "' . $piesa->titlu . '" a fost modificată cu succes!');
+        if($request->file()) {    
+            // stergerea imaginii vechi       
+            if ($artist->imagine){
+                $cale_si_fisier = $artist->imagine->imagine_cale . $artist->imagine->imagine_nume;
+                Storage::disk('public')->delete($cale_si_fisier);
+
+                // dd($cale_si_fisier, Storage::disk('public'));
+
+                //stergere director daca acesta este gol
+                if (empty(Storage::disk('public')->allFiles($artist->imagine->imagine_cale))) {
+                    Storage::disk('public')->deleteDirectory($artist->imagine->imagine_cale);
+                }
+
+                $artist->imagine->delete();
+            }
+
+
+            $nume = $request->file('imagine')->getClientOriginalName();
+            $cale = '/uploads/imagini/artisti/' . $artist->id . '/';
+            $request->file('imagine')->move(public_path() . '/' . $cale, $nume);
+
+            $imagine = new Imagine;
+            $imagine->referinta_id = $artist->id;
+            $imagine->referinta_categorie = 'artisti';
+            $imagine->imagine_nume = $nume;
+            $imagine->imagine_cale = $cale;
+            $imagine->save();
+        }
+
+        return redirect($artist->path())->with('status', 'Artistul „' . $artist->nume . '” a fost modificat cu succes!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Piesa  $piesa
+     * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Piesa $piesa)
-    {
-        $piesa->delete();
-        return redirect('/piese')->with('status', 'Piesa "' . $piesa->titlu . '" a fost ștearsă cu succes!');
+    public function destroy(Artist $artist)
+    {      
+        $artist->delete();
+
+        if ($artist->imagine){
+            $cale_si_fisier = $artist->imagine->imagine_cale . $artist->imagine->imagine_nume;
+            Storage::disk('public')->delete($cale_si_fisier);
+
+            // dd($cale_si_fisier, Storage::disk('public'));
+
+            //stergere director daca acesta este gol
+            if (empty(Storage::disk('public')->allFiles($artist->imagine->imagine_cale))) {
+                Storage::disk('public')->deleteDirectory($artist->imagine->imagine_cale);
+            }
+
+            $artist->imagine->delete();
+        }
+
+        return redirect('/artisti')->with('status', 'Artistul "' . $artist->nume . '" a fost șters cu succes!');
     }
 
     /**
