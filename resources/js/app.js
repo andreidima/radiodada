@@ -40,7 +40,8 @@ if (document.querySelector('#app1')) {
         data: {
             piesa: '',
             trupa: '',
-            titlu: ''
+            titlu: '',
+            imagine: '',
         },
         // methods: {
         //     trupa_func(trupa) {

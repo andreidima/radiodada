@@ -1,6 +1,28 @@
-@extends ('layouts.app')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/mycss.css') }}" rel="stylesheet">
+    <!-- Font Awesome links -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -8,15 +30,17 @@
 
 
         <div class="row" id="app1">
+            @if ($piese->where('categorie', 'Top')->first()->artist->imagine)
+                <div class="col-lg-12 mb-4">
+                    <img src="{{ 
+                                    env('APP_URL') . 
+                                    $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_cale . 
+                                    $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_nume 
+                        }}" alt="" width="100%">
+                </div>
+            @endif
             <div class="col-lg-6">
-                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
-                @csrf
-                            <button type="submit" class="btn btn-danger border border-dark rounded-pill">
-                                Test
-                            </button>
-
-                </form>
-                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
+                {{-- <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune"> --}}
                 @csrf
 
                     <div class="form-row">
@@ -27,10 +51,16 @@
                                 <div class="col-lg-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="voteazaPiesa" id="voteazaPiesa{{ $piesa->id }}" value="{{ $piesa->id }}"
-                                            v-on:click="trupa = '{{ addslashes($piesa->artist) }}';titlu = '{{ addslashes($piesa->titlu) }}'"
+                                            v-on:click="
+                                                trupa = '{{ addslashes($piesa->artist->nume) }}';
+                                                titlu = '{{ addslashes($piesa->nume) }}'
+                                                imagine = '{{ addslashes(env('APP_URL')) . 
+                                                    addslashes($piesa->artist->imagine->imagine_cale) . 
+                                                    addslashes($piesa->artist->imagine->imagine_nume) }}'
+                                            "
                                         >
                                         <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
-                                            {{ $loop->index }}. {{ $piesa->artist }} - {{ $piesa->titlu }} - {{ $piesa->voturi }} 
+                                            {{ $loop->index }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }} 
                                         </label>
                                     </div>
                                 </div>
@@ -45,10 +75,10 @@
                                 <div class="col-lg-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="voteazaPiesa" id="voteazaPiesa{{ $piesa->id }}" value="{{ $piesa->id }}"
-                                            v-on:click="trupa = '{{ addslashes($piesa->artist) }}';titlu = '{{ addslashes($piesa->titlu) }}';"
+                                            v-on:click="trupa = '{{ addslashes($piesa->artist->nume) }}';titlu = '{{ addslashes($piesa->nume) }}';"
                                         >
                                         <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
-                                            {{ $loop->index }}. {{ $piesa->artist }} - {{ $piesa->titlu }} - {{ $piesa->voturi }} 
+                                            {{ $loop->index }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }} 
                                         </label>
                                     </div>
                                 </div>
@@ -60,9 +90,9 @@
                             </button>
                         </div>
                     </div>
-                </form>
+                {{-- </form> --}}
 
-                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
+                {{-- <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune"> --}}
                 @csrf
                     <div class="form-row">
                         <div class="col-lg-12 justify-content-center">
@@ -75,13 +105,15 @@
                             <button type="submit" class="btn btn-danger border border-dark rounded-pill"  name="action" value="Propunere">Propune</button>
                         </div>
                     </div>
-                </form>
+                {{-- </form> --}}
             </div>
             <div class="col-lg-6">
-                <h1>
-                    @{{ trupa }}
-                </h1>
-                <h1>
+                <div class="row">
+                    <div class="col-lg-12 mb-4">
+                        <img :src="imagine" alt="" width="100%">
+                    </div>
+                </div>
+                <h1 v-cloak>
                     @{{ titlu }}
                 </h1>
             </div>
@@ -113,4 +145,3 @@
         </div>
     </div>
 </div>
-@endsection

@@ -11,7 +11,7 @@ class VoteazaPropuneController extends Controller
      */
     public function create()
     {
-        $piese = \App\Models\Piesa::orderByDesc('voturi')->get();
+        $piese = \App\Models\Piesa::with('artist')->orderByDesc('voturi')->get();
 
         return view('voteaza_si_propune.create', compact('piese'));
     }

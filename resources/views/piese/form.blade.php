@@ -56,7 +56,17 @@
                     <option value="Top" {{ (old('categorie', $piesa->categorie) == "Top") ? 'selected' : '' }}>Top</option>
                     <option value="Propunere" {{ (old('categorie', $piesa->categorie) == "Propunere") ? 'selected' : '' }}>Propunere</option>
                 </select>      
-            </div> 
+            </div>                 
+            <div class="form-group col-lg-12">  
+                <label for="voturi" class="mb-0 pl-3">Voturi:</label>                                      
+                <input 
+                    type="text" 
+                    class="form-control form-control-sm rounded-pill {{ $errors->has('voturi') ? 'is-invalid' : '' }}" 
+                    name="voturi" 
+                    placeholder="" 
+                    value="{{ old('voturi', $piesa->voturi) }}"
+                    required> 
+            </div>  
         </div>      
                                 
         <div class="form-row py-2 justify-content-center">                                    

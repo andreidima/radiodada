@@ -26,13 +26,13 @@ class PiesaController extends Controller
             //     return $query->where('artist', 'like', '%' . $search_artist . '%');
             // })
             ->when($categorie, function ($query, $categorie) {
-                return $query->where('categorie', 'like', '%' . $categorie . '%');
+                return $query->where('categorie', 'like', '%' . $categorie . '%')
+                            ->orderByDesc('voturi');
             })
             ->when(!$categorie, function ($query, $categorie) {
-                return $query->where('categorie', '<>', 'Asteapta aprobare');
-            })
-            // ->orderByDesc('voturi')
-            ->latest()
+                return $query->where('categorie', '<>', 'Asteapta aprobare')
+                            ->latest();
+            })            
             ->simplePaginate(25);
         return view('piese.index', compact('piese', 'search_nume'));
     }
@@ -124,7 +124,8 @@ class PiesaController extends Controller
             'artist_id' => 'nullable',
             'link_youtube' => 'nullable|max:250',
             'link_interviu' => 'nullable|max:250',
-            'categorie' => 'required|max:250'
+            'categorie' => 'required|max:250',
+            'voturi' => 'nullable|numeric|digits_between:1,4'
         ]);
     }
 }
