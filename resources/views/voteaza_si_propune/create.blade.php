@@ -24,7 +24,7 @@
 </head>
 <body>
 {{-- <div class="container"> --}}
-<div>
+<div class="m-2">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
