@@ -28,17 +28,27 @@
         <div class="col-md-12">
             <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
 
-
-        <div class="row" id="app1">
             @if ($piese->where('categorie', 'Top')->first()->artist->imagine)
-                <div class="col-lg-12 mb-4">
-                    <img src="{{ 
-                                    env('APP_URL') . 
-                                    $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_cale . 
-                                    $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_nume 
-                        }}" alt="" width="100%">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img src="{{ 
+                                        env('APP_URL') . 
+                                        $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_cale . 
+                                        $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_nume 
+                            }}" alt="" width="100%">
+                    </div>
                 </div>
             @endif
+
+        <div class="row">
+            <div class="col-lg-12 mb-4">
+                <h3 class="text-white py-3 px-5" style="background-color:black">
+                    Cea mai 9 muzică bună
+                </h3>
+            </div>
+        </div>
+
+        <div class="row px-4" id="app1">
             <div class="col-lg-6">
                 {{-- <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune"> --}}
                 @csrf
@@ -53,10 +63,13 @@
                                         <input class="form-check-input" type="radio" name="voteazaPiesa" id="voteazaPiesa{{ $piesa->id }}" value="{{ $piesa->id }}"
                                             v-on:click="
                                                 trupa = '{{ addslashes($piesa->artist->nume) }}';
-                                                titlu = '{{ addslashes($piesa->nume) }}'
+                                                titlu = '{{ addslashes($piesa->nume) }}';
                                                 imagine = '{{ addslashes(env('APP_URL')) . 
                                                     addslashes($piesa->artist->imagine->imagine_cale) . 
-                                                    addslashes($piesa->artist->imagine->imagine_nume) }}'
+                                                    addslashes($piesa->artist->imagine->imagine_nume) }}';
+                                                descriere = '{{ addslashes($piesa->artist->descriere) }}';
+                                                link_youtube = '{{ addslashes($piesa->link_youtube) }}';
+                                                link_interviu = '{{ addslashes($piesa->link_interviu) }}'
                                             "
                                         >
                                         <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
@@ -69,13 +82,23 @@
                         @foreach ($piese->where('categorie', 'Propunere') as $piesa)
                             @if ($loop->first)
                                 <div class="col-lg-12 py-4 justify-content-center">
+                                    <p class="py-2"></p>
                                     <h3 class="text-center">Propuneri</h3>
                                 </div>                                
                             @endif                            
                                 <div class="col-lg-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="voteazaPiesa" id="voteazaPiesa{{ $piesa->id }}" value="{{ $piesa->id }}"
-                                            v-on:click="trupa = '{{ addslashes($piesa->artist->nume) }}';titlu = '{{ addslashes($piesa->nume) }}';"
+                                            v-on:click="
+                                                trupa = '{{ addslashes($piesa->artist->nume) }}';
+                                                titlu = '{{ addslashes($piesa->nume) }}';
+                                                imagine = '{{ addslashes(env('APP_URL')) . 
+                                                    addslashes($piesa->artist->imagine->imagine_cale) . 
+                                                    addslashes($piesa->artist->imagine->imagine_nume) }}';
+                                                descriere = '{{ addslashes($piesa->artist->descriere) }}';
+                                                link_youtube = '{{ addslashes($piesa->link_youtube) }}';
+                                                link_interviu = '{{ addslashes($piesa->link_interviu) }}'
+                                            "
                                         >
                                         <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
                                             {{ $loop->index }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }} 
@@ -109,13 +132,27 @@
             </div>
             <div class="col-lg-6">
                 <div class="row">
-                    <div class="col-lg-12 mb-4">
+                    <div class="col-lg-12 mb-2">
                         <img :src="imagine" alt="" width="100%">
                     </div>
+                    <div v-cloak class="col-lg-12 mb-2">
+                            @{{ descriere }}
+                    </div>
+                    <div v-cloak v-if="link_youtube !== ''" class="col-lg-6">
+                        <a :href="link_youtube" target="_blank">
+                            <h3>
+                                <i class="fab fa-youtube mr-1"></i>Youtube
+                            </h3>
+                        </a>
+                    </div>
+                    <div v-cloak v-if="link_interviu !== ''"  class="col-lg-6">
+                        <a :href="link_interviu" target="_blank">
+                            <h3>
+                                <i class="fas fa-microphone-alt mr-1"></i>Interviu
+                            </h3>
+                        </a>
+                    </div>
                 </div>
-                <h1 v-cloak>
-                    @{{ titlu }}
-                </h1>
             </div>
         </div>
 

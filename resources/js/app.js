@@ -42,6 +42,9 @@ if (document.querySelector('#app1')) {
             trupa: '',
             titlu: '',
             imagine: '',
+            descriere: '',
+            link_youtube: '',
+            link_interviu: ''
         },
         // methods: {
         //     trupa_func(trupa) {
