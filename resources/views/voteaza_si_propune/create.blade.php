@@ -73,7 +73,7 @@
                                             "
                                         >
                                         <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
-                                            {{ $loop->index }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }} 
+                                            {{ $loop->iteration }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }} 
                                         </label>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                             "
                                         >
                                         <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
-                                            {{ $loop->index }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }} 
+                                            {{ $loop->iteration }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }} 
                                         </label>
                                     </div>
                                 </div>
