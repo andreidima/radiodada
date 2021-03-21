@@ -49,10 +49,12 @@
             </div>
         </div>
 
-        @include ('errors')
 
         <div class="row px-4" id="app1">
             <div class="col-lg-6">
+
+                @include ('errors')
+
                 <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
                 @csrf
 
