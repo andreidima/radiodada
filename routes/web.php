@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
 
-// Route::resource('voteaza-si-propune', App\Http\Controllers\VoteazaPropuneController::class)->only([
-//     'create', 'store'
-// ]);;
+Route::resource('voteaza-si-propune', App\Http\Controllers\VoteazaPropuneController::class)->only([
+    'create', 'store'
+]);;
 
-Route::any('voteaza-si-propune/adauga', [App\Http\Controllers\VoteazaPropuneController::class, 'voteazaPropune']);
+// Route::any('voteaza-si-propune/adauga', [App\Http\Controllers\VoteazaPropuneController::class, 'voteazaPropune']);
 
 Route::middleware(['auth'])->group(function () {
     // Route::get('/', function () {
