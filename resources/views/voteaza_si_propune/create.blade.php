@@ -53,7 +53,7 @@
 
         <div class="row px-4" id="app1">
             <div class="col-lg-6">
-                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune/adauga">
+                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
                 @csrf
 
                     <div class="form-row">
@@ -118,7 +118,7 @@
                     </div>
                 </form>
 
-                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune/adauga">
+                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
                 @csrf
                     <div class="form-row">
                         <div class="col-lg-12 justify-content-center">
