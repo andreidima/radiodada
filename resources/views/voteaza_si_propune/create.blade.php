@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="container">
-    
+
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
@@ -32,10 +32,10 @@
             @if ($piese->where('categorie', 'Top')->first()->artist->imagine)
                 <div class="row">
                     <div class="col-lg-12">
-                        <img src="{{ 
-                                        env('APP_URL') . 
-                                        $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_cale . 
-                                        $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_nume 
+                        <img src="{{
+                                        env('APP_URL') .
+                                        $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_cale .
+                                        $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_nume
                             }}" alt="" width="100%">
                     </div>
                 </div>
@@ -49,9 +49,11 @@
             </div>
         </div>
 
+        @include ('errors')
+
         <div class="row px-4" id="app1">
             <div class="col-lg-6">
-                {{-- <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune"> --}}
+                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
                 @csrf
 
                     <div class="form-row">
@@ -65,8 +67,8 @@
                                             v-on:click="
                                                 trupa = '{{ addslashes($piesa->artist->nume) }}';
                                                 titlu = '{{ addslashes($piesa->nume) }}';
-                                                imagine = '{{ addslashes(env('APP_URL')) . 
-                                                    addslashes($piesa->artist->imagine->imagine_cale) . 
+                                                imagine = '{{ addslashes(env('APP_URL')) .
+                                                    addslashes($piesa->artist->imagine->imagine_cale) .
                                                     addslashes($piesa->artist->imagine->imagine_nume) }}';
                                                 descriere = '{{ addslashes($piesa->artist->descriere) }}';
                                                 link_youtube = '{{ addslashes($piesa->link_youtube) }}';
@@ -74,7 +76,7 @@
                                             "
                                         >
                                         <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
-                                            {{ $loop->iteration }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }} 
+                                            {{ $loop->iteration }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }}
                                         </label>
                                     </div>
                                 </div>
@@ -85,16 +87,16 @@
                                 <div class="col-lg-12 py-4 justify-content-center">
                                     <p class="py-2"></p>
                                     <h3 class="text-center">Propuneri</h3>
-                                </div>                                
-                            @endif                            
+                                </div>
+                            @endif
                                 <div class="col-lg-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="voteazaPiesa" id="voteazaPiesa{{ $piesa->id }}" value="{{ $piesa->id }}"
                                             v-on:click="
                                                 trupa = '{{ addslashes($piesa->artist->nume) }}';
                                                 titlu = '{{ addslashes($piesa->nume) }}';
-                                                imagine = '{{ addslashes(env('APP_URL')) . 
-                                                    addslashes($piesa->artist->imagine->imagine_cale) . 
+                                                imagine = '{{ addslashes(env('APP_URL')) .
+                                                    addslashes($piesa->artist->imagine->imagine_cale) .
                                                     addslashes($piesa->artist->imagine->imagine_nume) }}';
                                                 descriere = '{{ addslashes($piesa->artist->descriere) }}';
                                                 link_youtube = '{{ addslashes($piesa->link_youtube) }}';
@@ -102,7 +104,7 @@
                                             "
                                         >
                                         <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
-                                            {{ $loop->iteration }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }} 
+                                            {{ $loop->iteration }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }}
                                         </label>
                                     </div>
                                 </div>
@@ -114,22 +116,22 @@
                             </button>
                         </div>
                     </div>
-                {{-- </form> --}}
+                </form>
 
-                {{-- <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune"> --}}
+                <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
                 @csrf
                     <div class="form-row">
                         <div class="col-lg-12 justify-content-center">
-                            <label for="PropunereNoua" class="form-label">
+                            <label for="propunere" class="form-label">
                                 Adauga o noua propunere. Propunerea va intra in lista de mai sus numai dupa acordul Directorului Muzical
                             </label>
-                            <input type="text" class="form-control"  name="Propunere" id="Propunere" aria-describedby="propunere">
+                            <input type="text" class="form-control"  name="propunere" id="propunere" aria-describedby="propunere">
                         </div>
                         <div class="col-lg-12 mb-3 py-3 d-flex justify-content-center">
                             <button type="submit" class="btn btn-danger border border-dark rounded-pill"  name="action" value="Propunere">Propune</button>
                         </div>
                     </div>
-                {{-- </form> --}}
+                </form>
             </div>
             <div class="col-lg-6">
                 <div class="row">
