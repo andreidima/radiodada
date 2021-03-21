@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<div>
 
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -49,12 +49,10 @@
             </div>
         </div>
 
+        @include ('errors')
 
         <div class="row px-4" id="app1">
             <div class="col-lg-6">
-
-                @include ('errors')
-
                 <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
                 @csrf
 
