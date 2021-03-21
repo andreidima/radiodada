@@ -32,7 +32,7 @@
                     {{-- {{ session('status') }} --}}
                     @include ('errors')
                 </h3>
-                <div class="text-center">
+                <div class="text-center mb-5">
                     <a class="btn btn-primary" href="/voteaza-si-propune/adauga" role="button">Revino la Topuri</a>
                 </div>
             </div>
