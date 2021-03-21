@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
 
+Route::get('voteaza_si_propune/mesaj', [App\Http\Controllers\VoteazaPropuneController::class, 'mesaj']);
+
 Route::resource('voteaza-si-propune', App\Http\Controllers\VoteazaPropuneController::class)->only([
     'create', 'store'
-]);;
+]);
 
 // Route::any('voteaza-si-propune/adauga', [App\Http\Controllers\VoteazaPropuneController::class, 'voteazaPropune']);
 

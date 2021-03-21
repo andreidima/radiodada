@@ -27,17 +27,17 @@ class VoteazaPropuneController extends Controller
     {
         switch ($request->input('action')) {
             case 'Voteaza':
-                if ($request->session()->has('votat_deja')) {
-                    return back()->with('error', 'Ai votat deja pentru o piesă din acest top. Poți vota o singură dată.');
-                } else {
+                // if ($request->session()->has('votat_deja')) {
+                //     return back()->with('error', 'Ai votat deja pentru o piesă din acest top. Poți vota o singură dată.');
+                // } else {
                     $piesa = Piesa::find($request->voteazaPiesa);
                     $piesa->voturi ++ ;
                     $piesa->save();
 
                     $request->session()->put('votat_deja', 'da');
 
-                    return back()->with('status', 'Ai votat piesa „' . $piesa->nume . '”!');
-                }
+                    return redirect('/voteaza_si_propune/mesaj')->with('status', 'Votul dumneavoastră pentru „' . ($piesa->artist->nume ?? '') . ' - ' . $piesa->nume . '” a fost inregistrat!');
+                // }
                 break;
 
             case 'Propunere':
@@ -58,8 +58,13 @@ class VoteazaPropuneController extends Controller
         // dd($request, $request->input('action'));
     }
 
-    public function voteazaPropune(Request $request)
+    public function mesaj()
     {
+        return view('voteaza_si_propune.mesaj');
+    }
+
+    public function voteazaPropune(Request $request)
+{
         switch ($request->input('action')) {
             case 'Voteaza':
                 if ($request->session()->has('votat_deja')) {
@@ -71,7 +76,7 @@ class VoteazaPropuneController extends Controller
 
                     $request->session()->put('votat_deja', 'da');
 
-                    return back()->with('status', 'Ai votat piesa „' . $piesa->nume . '”!');
+                    return back()->with('status', 'Votul dumneavoastră pentru „' . $piesa->autor->nume . ' - ' . $piesa->nume . '” a fost inregistrat!');
                 }
                 break;
 
