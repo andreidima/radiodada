@@ -30,11 +30,18 @@ class VoteazaPropuneController extends Controller
                 // if ($request->session()->has('votat_deja')) {
                 //     return back()->with('error', 'Ai votat deja pentru o piesă din acest top. Poți vota o singură dată.');
                 // } else {
+                    request()->validate(
+                        ['voteazaPiesa' => 'required|integer',],
+                        ['voteazaPiesa.required' => 'Selectează piesa pe care dorești să o votezi.',]
+                    );
+
                     $piesa = Piesa::find($request->voteazaPiesa);
                     $piesa->voturi ++ ;
                     $piesa->save();
 
                     $request->session()->put('votat_deja', 'da');
+
+                    $request->session()->flash('Voteaza', 'Votul dumneavoastră pentru „' . ($piesa->artist->nume ?? '') . ' - ' . $piesa->nume . '” a fost inregistrat!');
 
                     return redirect('/voteaza_si_propune/mesaj')->with('status', 'Votul dumneavoastră pentru „' . ($piesa->artist->nume ?? '') . ' - ' . $piesa->nume . '” a fost inregistrat!');
                 // }
