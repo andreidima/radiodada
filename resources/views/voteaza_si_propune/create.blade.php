@@ -28,7 +28,7 @@
     {{-- Topul International --}}
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="shadow-lg mb-4" style="border-radius: 40px 40px 40px 40px;">
+            <div class="mb-2" style="border-radius: 40px 40px 40px 40px;">
 
                 @if ($piese->where('categorie', 'Top International')->first()->artist->imagine ?? null)
                     <div class="row">
