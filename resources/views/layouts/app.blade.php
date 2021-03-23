@@ -36,7 +36,7 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    
+
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active mr-4">
@@ -63,6 +63,11 @@
                                 <a class="nav-link" href="{{ route('propuneri.index') }}">
                                     <i class="fas fa-pencil-alt mr-1"></i>Propuneri de aprobat
                                 </a>
+                            </li>
+                            <li class="nav-item active mr-4">
+                                <p>
+                                    {{ Config::get('session.same_site') }}
+                                </p>
                             </li>
                         </ul>
 

@@ -14,6 +14,8 @@ class VoteazaPropuneController extends Controller
      */
     public function create()
     {
+        config(['session.same_site' => 'none']);
+        // dd(config('session.same_site'));
         $piese = Piesa::with('artist')->orderByDesc('voturi')->get();
 
         return view('voteaza_si_propune.create', compact('piese'));
@@ -25,6 +27,7 @@ class VoteazaPropuneController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(config('session.same_site'));
         switch ($request->input('action')) {
             case 'Voteaza':
                 // if ($request->session()->has('votat_deja')) {
@@ -43,7 +46,8 @@ class VoteazaPropuneController extends Controller
 
                     $request->session()->flash('Voteaza', 'Votul dumneavoastră pentru „' . ($piesa->artist->nume ?? '') . ' - ' . $piesa->nume . '” a fost inregistrat!');
 
-                    return redirect('/voteaza_si_propune/mesaj')->with('status', 'Votul dumneavoastră pentru „' . ($piesa->artist->nume ?? '') . ' - ' . $piesa->nume . '” a fost inregistrat!');
+                    // return redirect('/voteaza_si_propune/mesaj')->with('status', 'Votul dumneavoastră pentru „' . ($piesa->artist->nume ?? '') . ' - ' . $piesa->nume . '” a fost inregistrat!');
+                    return back();
                 // }
                 break;
 

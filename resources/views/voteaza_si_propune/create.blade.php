@@ -28,6 +28,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
+                <p>
+                                    {{ Config::get('session.same_site') }}
+                </p>
 
             @if ($piese->where('categorie', 'Top')->first()->artist->imagine)
                 <div class="row">
