@@ -64,11 +64,6 @@
                                     <i class="fas fa-pencil-alt mr-1"></i>Propuneri de aprobat
                                 </a>
                             </li>
-                            <li class="nav-item active mr-4">
-                                <p>
-                                    {{ Config::get('session.same_site') }}
-                                </p>
-                            </li>
                         </ul>
 
                         <!-- Right Side Of Navbar -->

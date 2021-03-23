@@ -28,17 +28,14 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
-                <p>
-                                    {{ Config::get('session.same_site') }}
-                </p>
 
-            @if ($piese->where('categorie', 'Top')->first()->artist->imagine)
+            @if ($piese->where('categorie', 'Top International')->first()->artist->imagine ?? null)
                 <div class="row">
                     <div class="col-lg-12">
                         <img src="{{
                                         env('APP_URL') .
-                                        $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_cale .
-                                        $piese->where('categorie', 'Top')->first()->artist->imagine->imagine_nume
+                                        $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_cale .
+                                        $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_nume
                             }}" alt="" width="100%">
                     </div>
                 </div>
@@ -52,7 +49,7 @@
             </div>
         </div>
 
-        @include ('errors')
+        {{-- @include ('errors') --}}
 
         <div class="row px-4" id="app1">
             <div class="col-lg-6">
@@ -63,10 +60,10 @@
                         <div class="col-lg-12 pb-2 justify-content-center">
                             <h3 class="text-center">Top</h3>
                         </div>
-                        @foreach ($piese->where('categorie', 'Top') as $piesa)
+                        @foreach ($piese->where('categorie', 'Top International') as $piesa)
                                 <div class="col-lg-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="voteazaPiesa" id="voteazaPiesa{{ $piesa->id }}" value="{{ $piesa->id }}"
+                                        <input class="form-check-input" type="radio" name="top_international_piesa" id="top_international_piesa{{ $piesa->id }}" value="{{ $piesa->id }}"
                                             v-on:click="
                                                 trupa = '{{ addslashes($piesa->artist->nume) }}';
                                                 titlu = '{{ addslashes($piesa->nume) }}';
@@ -78,7 +75,7 @@
                                                 link_interviu = '{{ addslashes($piesa->link_interviu) }}'
                                             "
                                         >
-                                        <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
+                                        <label class="form-check-label" for="top_international_piesa{{ $piesa->id }}">
                                             {{ $loop->iteration }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }}
                                         </label>
                                     </div>
@@ -92,9 +89,9 @@
                                     <h3 class="text-center">Propuneri</h3>
                                 </div>
                             @endif
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="voteazaPiesa" id="voteazaPiesa{{ $piesa->id }}" value="{{ $piesa->id }}"
+                                        <input class="form-check-input" type="radio" name="top_international_piesa" id="top_international_piesa{{ $piesa->id }}" value="{{ $piesa->id }}"
                                             v-on:click="
                                                 trupa = '{{ addslashes($piesa->artist->nume) }}';
                                                 titlu = '{{ addslashes($piesa->nume) }}';
@@ -106,15 +103,32 @@
                                                 link_interviu = '{{ addslashes($piesa->link_interviu) }}'
                                             "
                                         >
-                                        <label class="form-check-label" for="voteazaPiesa{{ $piesa->id }}">
+                                        <label class="form-check-label" for="top_international_piesa{{ $piesa->id }}">
                                             {{ $loop->iteration }}. {{ $piesa->artist->nume }} - {{ $piesa->nume }} - {{ $piesa->voturi }}
                                         </label>
                                     </div>
                                 </div>
                         @endforeach
 
-                        <div class="col-lg-12 mb-3 py-3 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-danger border border-dark rounded-pill" name="action" value="Voteaza">
+
+                        {{-- <div class="col-lg-12 mb-0 py-3 d-flex justify-content-center"> --}}
+                            @if ($errors->first('top_international_piesa_selectata'))
+                                <div class="col-lg-12 px-2 alert alert-danger">
+                                    {{ $errors->first('top_international_piesa_selectata') }}
+                                </div>
+                            @elseif (session()->has('top_international_votat'))
+                                <div class="col-lg-12 px-2 alert alert-success">
+                                    {{ session('top_international_votat') }}
+                                </div>
+                            @elseif (session()->has('top_international_votat_deja'))
+                                <div class="col-lg-12 px-2 alert alert-danger">
+                                    {{ session('top_international_votat_deja') }}
+                                </div>
+                            @endif
+                        {{-- </div> --}}
+
+                        <div class="col-lg-12 mb-3 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-danger border border-dark rounded-pill" name="action" value="top_international_voteaza">
                                 Votează
                             </button>
                         </div>
