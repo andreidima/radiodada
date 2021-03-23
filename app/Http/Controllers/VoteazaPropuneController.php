@@ -53,21 +53,72 @@ class VoteazaPropuneController extends Controller
                 }
                 break;
 
-            case 'Propunere':
-                if ($request->session()->has('propus_deja')) {
-                    return back()->with('error', 'Ai propus deja o piesă pentru acest top. Poți propune o singură dată.');
+            case 'top_international_propunere':
+                if ($request->session()->has('top_international_propus_deja_variabila_sesiune')) {
+                    return back()->with('top_international_propus_deja', 'Ai propus deja o piesă pentru acest top. Poți propune o singură dată.');
                 } else {
+                    request()->validate(
+                        ['top_international_propunere' => 'required|max:500'],
+                        [
+                            'top_international_propunere.required' => 'Completează piesa pe care dorești sa o propui.',
+                            'top_international_propunere.max:500' => 'Poți introduce cel mult 500 de caractere.',
+                        ]
+                    );
                     $propunere = new Propunere;
-                    $propunere->nume = $request->propunere;
+                    $propunere->nume = $request->top_international_propunere;
+                    $propunere->top = 'Top International';
                     $propunere->save();
 
-                    $request->session()->put('propus_deja', 'da');
+                    $request->session()->put('top_international_propus_deja_variabila_sesiune', 'da');
 
-                    return back()->with('status', 'Ai propus piesa „' . $propunere->nume . '”!');
+                    return back()->with('top_international_propus', 'Ai propus piesa „' . $propunere->nume . '”!');
+                }
+                break;
+            case 'top_romanesc_voteaza':
+                if ($request->session()->has('top_romanesc_votat_deja_variabila_sesiune')) {
+                    return back()->with('top_romanesc_votat_deja', 'Ai votat deja pentru o piesă din acest top. Poți vota o singură dată.');
+                } else {
+                    request()->validate(
+                        ['top_romanesc_piesa' => 'required|integer'],
+                        ['top_romanesc_piesa.required' => 'Selectează piesa pe care dorești să o votezi.']
+                    );
+
+                    $piesa = Piesa::find($request->top_romanesc_piesa);
+                    $piesa->voturi ++ ;
+                    $piesa->save();
+
+                    $request->session()->put('top_romanesc_votat_deja_variabila_sesiune', 'da');
+
+                    // $request->session()->flash('Voteaza', 'Votul dumneavoastră pentru „' . ($piesa->artist->nume ?? '') . ' - ' . $piesa->nume . '” a fost inregistrat!');
+
+                    return back()->with('top_romanesc_votat', 'Votul dumneavoastră pentru „' . ($piesa->artist->nume ?? '') . ' - ' . $piesa->nume . '” a fost inregistrat!');
+                    // return back();
+                }
+                break;
+
+            case 'top_romanesc_propunere':
+                if ($request->session()->has('top_romanesc_propus_deja_variabila_sesiune')) {
+                    return back()->with('top_romanesc_propus_deja', 'Ai propus deja o piesă pentru acest top. Poți propune o singură dată.');
+                } else {
+                    request()->validate(
+                        ['top_romanesc_propunere' => 'required|max:500'],
+                        [
+                            'top_romanesc_propunere.required' => 'Completează piesa pe care dorești sa o propui.',
+                            'top_romanesc_propunere.max:500' => 'Poți introduce cel mult 500 de caractere.',
+                        ]
+                    );
+                    $propunere = new Propunere;
+                    $propunere->nume = $request->top_romanesc_propunere;
+                    $propunere->top = 'Top Romanesc';
+                    $propunere->save();
+
+                    $request->session()->put('top_romanesc_propus_deja_variabila_sesiune', 'da');
+
+                    return back()->with('top_romanesc_propus', 'Ai propus piesa „' . $propunere->nume . '”!');
                 }
                 break;
         }
-            return back()->with('status', 'Ai votat' . $request->voteazaPiesa);
+            // return back()->with('status', 'Ai votat' . $request->voteazaPiesa);
         // dd($request, $request->input('action'));
     }
 

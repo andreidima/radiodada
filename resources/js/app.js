@@ -38,13 +38,22 @@ if (document.querySelector('#app1')) {
     const app1 = new Vue({
         el: '#app1',
         data: {
-            piesa: '',
-            trupa: '',
-            titlu: '',
-            imagine: '',
-            descriere: '',
-            link_youtube: '',
-            link_interviu: ''
+            international_piesa: '',
+            international_trupa: '',
+            international_titlu: '',
+            international_imagine: '',
+            international_descriere: '',
+            international_link_youtube: '',
+            international_link_interviu: '',
+            international_magazin_virtual: '',
+            romanesc_piesa: '',
+            romanesc_trupa: '',
+            romanesc_titlu: '',
+            romanesc_imagine: '',
+            romanesc_descriere: '',
+            romanesc_link_youtube: '',
+            romanesc_link_interviu: '',
+            romanesc_magazin_virtual: ''
         },
         // methods: {
         //     trupa_func(trupa) {

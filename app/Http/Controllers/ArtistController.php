@@ -98,10 +98,10 @@ class ArtistController extends Controller
     {
         // dd($artist, $request);
         $this->validateRequest();
-        $artist->update($request->except(['imagine']));     
+        $artist->update($request->except(['imagine']));
 
-        if($request->file()) {    
-            // stergerea imaginii vechi       
+        if($request->file()) {
+            // stergerea imaginii vechi
             if ($artist->imagine){
                 $cale_si_fisier = $artist->imagine->imagine_cale . $artist->imagine->imagine_nume;
                 Storage::disk('public')->delete($cale_si_fisier);
@@ -139,7 +139,7 @@ class ArtistController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Artist $artist)
-    {      
+    {
         $artist->delete();
 
         if ($artist->imagine){
@@ -170,7 +170,8 @@ class ArtistController extends Controller
             'nume' => 'required|max:250',
             'imagine' => 'nullable|mimes:jpg,jpeg,png|max:2048',
             'link' => 'nullable|max:250',
-            'nume' => 'nullable|max:250',
+            'magazin_virtual' => 'nullable|max:250',
+            'descriere' => 'nullable|max:2000',
         ]);
     }
 }

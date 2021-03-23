@@ -1,15 +1,15 @@
 @extends ('layouts.app')
 
-@section('content')   
+@section('content')
 <div class="container card" style="border-radius: 40px 40px 40px 40px;">
         <div class="row card-header align-items-center" style="border-radius: 40px 40px 0px 0px;">
             <div class="col-lg-3">
                 <h4 class=" mb-0"><a href="{{ route('propuneri.index') }}"><i class="fas fa-list-alt mr-1"></i>Propuneri</a></h4>
-            </div> 
+            </div>
             <div class="col-lg-6">
             </div>
             <div class="col-lg-3 text-right">
-            </div> 
+            </div>
         </div>
 
         <div class="card-body px-0 py-3">
@@ -17,18 +17,19 @@
             @include ('errors')
 
             <div class="table-responsive rounded">
-                <table class="table table-striped table-hover table-sm rounded"> 
+                <table class="table table-striped table-hover table-sm rounded">
                     <thead class="text-white rounded" style="background-color:#e66800;">
                         <tr class="" style="padding:2rem">
                             <th>Nr. Crt.</th>
                             <th>Nume</th>
+                            <th>Top</th>
                             <th>Data</th>
                             <th class="text-center">Acțiuni</th>
                         </tr>
                     </thead>
-                    <tbody>    
-                        @forelse ($propuneri as $propunere)            
-                            <tr>                  
+                    <tbody>
+                        @forelse ($propuneri as $propunere)
+                            <tr>
                                 <td align="">
                                     {{ ($propuneri ->currentpage()-1) * $propuneri ->perpage() + $loop->index + 1 }}
                                 </td>
@@ -36,21 +37,24 @@
                                     {{ $propunere->nume }}
                                 </td>
                                 <td>
+                                    {{ $propunere->top }}
+                                </td>
+                                <td>
                                     {{ \Carbon\Carbon::parse($propunere->created_at)->isoFormat('DD.MM.YYYY') }}
-                                </td>    
-                                <td class="d-flex justify-content-end">                            
+                                </td>
+                                <td class="d-flex justify-content-end">
                                     <div style="flex" class="">
-                                        <a 
-                                            href="#" 
-                                            data-toggle="modal" 
+                                        <a
+                                            href="#"
+                                            data-toggle="modal"
                                             data-target="#stergePropunere{{ $propunere->id }}"
                                             title="Șterge Propunere"
                                             >
                                             <span class="badge badge-danger">Șterge</span>
                                         </a>
-                                    </div>                                     
+                                    </div>
                                 </td>
-                            </tr>  
+                            </tr>
                         @empty
                             {{-- <div>Nu s-au gasit rezervări în baza de date. Încearcă alte date de căutare</div> --}}
                         @endforelse
@@ -83,18 +87,18 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Renunță</button>
-                    
+
                     <form method="POST" action="{{ $propunere->path() }}">
-                        @method('DELETE')  
-                        @csrf   
-                        <button 
-                            type="submit" 
-                            class="btn btn-danger"  
+                        @method('DELETE')
+                        @csrf
+                        <button
+                            type="submit"
+                            class="btn btn-danger"
                             >
                             Șterge Propunere
-                        </button>                    
+                        </button>
                     </form>
-                
+
                 </div>
                 </div>
             </div>
