@@ -28,7 +28,7 @@
     {{-- Topul International --}}
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="shadow-lg mb-2" style="border-radius: 40px 40px 40px 40px;">
+            <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
 
                 @if ($piese->where('categorie', 'Top International')->first()->artist->imagine ?? null)
                     <div class="row">
@@ -200,21 +200,15 @@
                 </div>
 
 
-            </div>
-        </div>
-    </div>
 
 
-    {{-- Despartitor topuri --}}
-    <div class="row justify-content-center">
-        <div class="col-md-12 mb-4">
-        </div>
-    </div>
+                {{-- Despartitor topuri --}}
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                    </div>
+                </div>
 
-    {{-- Topul Romanesc --}}
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="shadow-lg" style="border-radius: 40px 40px 40px 40px;">
+                {{-- Topul Romanesc --}}
 
                 @if ($piese->where('categorie', 'Top Romanesc')->first()->artist->imagine ?? null)
                     <div class="row">
