@@ -14,7 +14,7 @@ class VoteazaPropuneController extends Controller
      */
     public function create()
     {
-        config(['session.same_site' => 'none']);
+        // config(['session.same_site' => 'none']);
         // dd(config('session.same_site'));
         $piese = Piesa::with('artist')->orderByDesc('voturi')->get();
 
