@@ -112,9 +112,9 @@
 
 
                         {{-- <div class="col-lg-12 mb-0 py-3 d-flex justify-content-center"> --}}
-                            @if ($errors->first('top_international_piesa_selectata'))
+                            @if ($errors->first('top_international_piesa'))
                                 <div class="col-lg-12 px-2 alert alert-danger">
-                                    {{ $errors->first('top_international_piesa_selectata') }}
+                                    {{ $errors->first('top_international_piesa') }}
                                 </div>
                             @elseif (session()->has('top_international_votat'))
                                 <div class="col-lg-12 px-2 alert alert-success">
