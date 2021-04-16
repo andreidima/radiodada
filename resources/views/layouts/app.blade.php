@@ -27,7 +27,7 @@
         @auth
             <nav class="navbar navbar-expand-md navbar-dark shadow py-0" style="background-color:darkcyan">
                 <div class="container">
-                    <a class="navbar-brand mr-5" href="{{ url('/piese') }}">
+                    <a class="navbar-brand mr-5" href="{{ url('/') }}">
                         {{ config('app.name', 'Radio Dada') }}
                         {{-- <img src="{{ asset('images/logo.png') }}" height="40" class="border border-dark rounded-pill mr-4"> --}}
                     </a>
@@ -39,26 +39,54 @@
 
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active mr-4">
+                            <li class="nav-item dropdown active mr-4">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-music mr-1"></i>Topuri
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link text-dark" href="/piese/categorie/Top International">
+                                        <i class="fas fa-star mr-1"></i>Top Internațional
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="nav-link text-dark" href="/piese/categorie/Top Romanesc">
+                                        <i class="fas fa-star mr-1"></i>Top Românesc
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown active mr-4">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-list-alt mr-1"></i>Propuneri
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link text-dark" href="/piese/categorie/Propunere Top International">
+                                        <i class="fas fa-list-alt mr-1"></i>Propuneri Internaționale
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="nav-link text-dark" href="/piese/categorie/Propunere Top Romanesc">
+                                        <i class="fas fa-list-alt mr-1"></i>Propuneri Românești
+                                    </a>
+                                </div>
+                            </li>
+                            {{-- <li class="nav-item active mr-4">
                                 <a class="nav-link" href="{{ route('piese.index') }}">
                                     <i class="fas fa-music mr-1"></i>Piese
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item active mr-4">
                                 <a class="nav-link" href="{{ route('artisti.index') }}">
                                     <i class="fas fa-users mr-1"></i>Artiști
                                 </a>
                             </li>
-                            <li class="nav-item active mr-4">
+                            {{-- <li class="nav-item active mr-4">
                                 <a class="nav-link" href="/piese/categorie/Top">
                                     <i class="fas fa-star mr-1"></i>Top
                                 </a>
-                            </li>
-                            <li class="nav-item active mr-4">
+                            </li> --}}
+                            {{-- <li class="nav-item active mr-4">
                                 <a class="nav-link" href="/piese/categorie/Propunere">
                                     <i class="fas fa-list-alt mr-1"></i>Propuneri
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item active mr-4">
                                 <a class="nav-link" href="{{ route('propuneri.index') }}">
                                     <i class="fas fa-pencil-alt mr-1"></i>Propuneri de aprobat

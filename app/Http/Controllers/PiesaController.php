@@ -26,13 +26,14 @@ class PiesaController extends Controller
             //     return $query->where('artist', 'like', '%' . $search_artist . '%');
             // })
             ->when($categorie, function ($query, $categorie) {
-                return $query->where('categorie', 'like', '%' . $categorie . '%')
+                // return $query->where('categorie', 'like', '%' . $categorie . '%')
+                return $query->where('categorie', $categorie)
                             ->orderByDesc('voturi');
             })
             ->when(!$categorie, function ($query, $categorie) {
                 return $query->where('categorie', '<>', 'Asteapta aprobare')
                             ->latest();
-            })            
+            })
             ->simplePaginate(25);
         return view('piese.index', compact('piese', 'search_nume'));
     }
@@ -46,7 +47,10 @@ class PiesaController extends Controller
     {
         $artisti = Artist::orderBy('nume')->get();
 
-        return view('piese.create', compact('artisti'));
+        // salvarea ultimului URL, pentru intoarcerea la acelasi Top
+        $last_url = url()->previous();
+
+        return view('piese.create', compact('artisti', 'last_url'));
     }
 
     /**
@@ -59,7 +63,7 @@ class PiesaController extends Controller
     {
         $piesa = Piesa::create($this->validateRequest($request));
 
-        return redirect('/piese')->with('status', 'Piesa „' . $piesa->titlu . '” a fost adăugată cu succes!');
+        return redirect($request->last_url)->with('status', 'Piesa „' . $piesa->nume . '” a fost adăugată cu succes!');
     }
 
     /**
@@ -83,7 +87,10 @@ class PiesaController extends Controller
     {
         $artisti = Artist::orderBy('nume')->get();
 
-        return view('piese.edit', compact('piesa', 'artisti'));
+        // salvarea ultimului URL, pentru intoarcerea la acelasi Top
+        $last_url = url()->previous();
+
+        return view('piese.edit', compact('piesa', 'artisti', 'last_url'));
     }
 
     /**
@@ -97,7 +104,7 @@ class PiesaController extends Controller
     {
         $piesa->update($this->validateRequest($request));
 
-        return redirect('/piese')->with('status', 'Piesa "' . $piesa->nume . '" a fost modificată cu succes!');
+        return redirect($request->last_url)->with('status', 'Piesa "' . $piesa->nume . '" a fost modificată cu succes!');
     }
 
     /**
@@ -109,7 +116,7 @@ class PiesaController extends Controller
     public function destroy(Piesa $piesa)
     {
         $piesa->delete();
-        return redirect('/piese')->with('status', 'Piesa "' . $piesa->titlu . '" a fost ștearsă cu succes!');
+        return back()->with('status', 'Piesa "' . $piesa->nume . '" a fost ștearsă cu succes!');
     }
 
     /**

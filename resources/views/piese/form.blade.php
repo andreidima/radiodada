@@ -71,11 +71,14 @@
             </div>
         </div>
 
+        {{-- salvarea ultimului URL, pentru intoarcerea la Topul corespunzator --}}
+        <input type="hidden" id="last_url" name="last_url" value="{{ $last_url }}">
+
         <div class="form-row py-2 justify-content-center">
             <div class="col-lg-8 d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary btn-sm mr-2 rounded-pill">{{ $buttonText }}</button>
                 {{-- <a class="btn btn-secondary btn-sm mr-4 rounded-pill" href="{{ $client_neserios->path() }}">Renunță</a>  --}}
-                <a class="btn btn-secondary btn-sm mr-4 rounded-pill" href="/piese">Renunță</a>
+                <a class="btn btn-secondary btn-sm mr-4 rounded-pill" href="{{ url()->previous() }}">Renunță</a>
             </div>
         </div>
     </div>

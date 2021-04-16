@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     //     return view('piese');
     // });
 
-    Route::redirect('/', 'piese');
+    Route::redirect('/', '/piese/categorie/Top International');
 
     Route::resource('piese', App\Http\Controllers\PiesaController::class,  ['parameters' => ['piese' => 'piesa']]);
 

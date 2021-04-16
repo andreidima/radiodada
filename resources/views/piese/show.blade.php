@@ -1,6 +1,6 @@
 @extends ('layouts.app')
 
-@section('content')   
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7">
@@ -9,7 +9,7 @@
                     <h6 class="ml-4 my-0" style="color:white"><i class="fas fa-music mr-1"></i>Piese / {{ $piesa->nume }}</h6>
                 </div>
 
-                <div class="card-body py-2 border border-secondary" 
+                <div class="card-body py-2 border border-secondary"
                     style="border-radius: 0px 0px 40px 40px;"
                     id="app1"
                 >
@@ -19,7 +19,7 @@
                     <div class="table-responsive col-md-12 mx-auto">
                         <table class="table table-sm table-striped table-hover"
                                 {{-- style="background-color:#008282" --}}
-                        > 
+                        >
                             <tr>
                                 <td>
                                     Nume
@@ -68,10 +68,10 @@
                             </tr>
                         </table>
                     </div>
-                                       
-                    <div class="form-row mb-2 px-2">                                    
-                        <div class="col-lg-12 d-flex justify-content-center">  
-                            <a class="btn btn-primary btn-sm rounded-pill" href="/piese">Pagină Piese</a> 
+
+                    <div class="form-row mb-2 px-2">
+                        <div class="col-lg-12 d-flex justify-content-center">
+                            <a class="btn btn-primary btn-sm rounded-pill" href="{{ url()->previous() }}">Înapoi</a>
                         </div>
                     </div>
 
