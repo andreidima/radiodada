@@ -32,10 +32,11 @@
                 <div class="row justify-content-center position-relative">
                     <div class="col-12">
                         <div class="text-white text-center mb-2" style="height:150px; background-color:black">
-                            <h4 class="text-white pt-4 pb-5 px-3" style="background-color:black">
+                            <h4 class="text-white py-4 px-3" style="background-color:black">
                                 Cea mai 9 muzică bună
                                 <br>
-                                Top10
+                                <br>
+                                Top 10
                             </h4>
                         </div>
 
@@ -82,7 +83,8 @@
                             <h4 class="text-white pt-4 pb-5 px-3" style="background-color:black">
                                 Românești de azi
                                 <br>
-                                Top10
+                                <br>
+                                Top 10
                             </h4>
                         </div>
 
