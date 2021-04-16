@@ -25,8 +25,111 @@
 <body style="background-color:white">
 <div class="container" id="app1">
 
-    {{-- Topul International --}}
+    {{-- Alegere Topuri --}}
     <div class="row justify-content-center">
+        <div class="col-md-4 mb-1">
+            <a href="#top_international" class="text-dark btn" @mouseover="schimbaCuloare('top_international_danger')" @mouseleave="schimbaCuloare('top_international_white')">
+                <div class="row justify-content-center position-relative">
+                    <div class="col-12">
+                        <div class="text-white text-center mb-2" style="height:150px; background-color:black">
+                            <h4 class="text-white pt-4 pb-5 px-3" style="background-color:black">
+                                Cea mai 9 muzică bună
+                                <br>
+                                Top10
+                            </h4>
+                        </div>
+
+                        @if ($piese->where('categorie', 'Top International')->first()->artist->imagine ?? null)
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <img src="{{
+                                                    env('APP_URL') .
+                                                    $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_cale .
+                                                    $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_nume
+                                        }}" alt=""
+                                        class="mw-100"
+                                        height="250px"
+                                        >
+                                    <br>
+                                    {{ $piese->where('categorie', 'Top International')->first()->artist->nume ?? ''}}
+                                    -
+                                    {{ $piese->where('categorie', 'Top International')->first()->nume ?? ''}}
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-12 mb-1 position-absolute d-flex justify-content-center align-items-center"
+                        style="top:120px;"
+                        >
+                        <div class="d-flex justify-content-center align-items-center" style="width:70px; height:70px; border-radius: 50px 50px 50px 50px;"
+                            :class="[top_international_bg_color, top_international_text_color]"
+                            >
+                            <h3 class="pt-2">
+                                <b>No/1</b>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <div class="col-md-4 mb-1">
+            <a href="#top_romanesc" class="text-dark btn" @mouseover="schimbaCuloare('top_romanesc_danger')" @mouseleave="schimbaCuloare('top_romanesc_white')">
+                <div class="row justify-content-center position-relative">
+                    <div class="col-12">
+                        <div class="text-white text-center mb-2" style="height:150px; background-color:black">
+                            <h4 class="text-white pt-4 pb-5 px-3" style="background-color:black">
+                                Românești de azi
+                                <br>
+                                Top10
+                            </h4>
+                        </div>
+
+                        @if ($piese->where('categorie', 'Top Romanesc')->first()->artist->imagine ?? null)
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <img src="{{
+                                                    env('APP_URL') .
+                                                    $piese->where('categorie', 'Top Romanesc')->first()->artist->imagine->imagine_cale .
+                                                    $piese->where('categorie', 'Top Romanesc')->first()->artist->imagine->imagine_nume
+                                        }}" alt=""
+                                        class="mw-100"
+                                        height="250px"
+                                        >
+                                    <br>
+                                    {{ $piese->where('categorie', 'Top Romanesc')->first()->artist->nume ?? ''}}
+                                    -
+                                    {{ $piese->where('categorie', 'Top Romanesc')->first()->nume ?? ''}}
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-12 mb-1 position-absolute d-flex justify-content-center align-items-center"
+                        style="top:120px;"
+                        >
+                        <div class="d-flex justify-content-center align-items-center" style="width:70px; height:70px; border-radius: 50px 50px 50px 50px;"
+                            :class="[top_romanesc_bg_color, top_romanesc_text_color]"
+                            >
+                            <h3 class="pt-2">
+                                <b>No/1</b>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    {{-- Linie despartitoare --}}
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <hr style="height:5px; color:black; background-color:black">
+        </div>
+    </div>
+
+    {{-- Topul International --}}
+    <div id="top_international" class="row justify-content-center">
         <div class="col-md-12">
             <div class="mb-2" style="border-radius: 40px 40px 40px 40px;">
 
@@ -205,11 +308,13 @@
                 {{-- Despartitor topuri --}}
                 <div class="row">
                     <div class="col-md-12 mb-4">
+                        <hr style="height:5px; color:black; background-color:black">
                     </div>
                 </div>
 
                 {{-- Topul Romanesc --}}
 
+                <div id="top_romanesc"></div>
                 @if ($piese->where('categorie', 'Top Romanesc')->first()->artist->imagine ?? null)
                     <div class="row">
                         <div class="col-lg-12">

@@ -53,15 +53,32 @@ if (document.querySelector('#app1')) {
             romanesc_descriere: '',
             romanesc_link_youtube: '',
             romanesc_link_interviu: '',
-            romanesc_magazin_virtual: ''
+            romanesc_magazin_virtual: '',
+
+            top_international_bg_color: 'bg-white',
+            top_international_text_color: 'text-black',
+
+            top_romanesc_bg_color: 'bg-white',
+            top_romanesc_text_color: 'text-black'
         },
-        // methods: {
-        //     trupa_func(trupa) {
-        //         this.trupa = trupa;
-        //     },
-        //     titlu_func: function (titlu) {
-        //         this.titlu = titlu;
-        //     }
-        // }
+
+
+        methods: {
+            schimbaCuloare: function (value) {
+                if (value == "top_international_danger"){
+                    this.top_international_bg_color = "bg-danger";
+                    this.top_international_text_color= "text-white";
+                } else if (value == "top_international_white") {
+                    this.top_international_bg_color = "bg-white";
+                    this.top_international_text_color = "text-black";
+                } else if (value == "top_romanesc_danger") {
+                    this.top_romanesc_bg_color = "bg-danger";
+                    this.top_romanesc_text_color = "text-white";
+                } else if (value == "top_romanesc_white") {
+                    this.top_romanesc_bg_color = "bg-white";
+                    this.top_romanesc_text_color = "text-black";
+                }
+            }
+        }
     });
 }
