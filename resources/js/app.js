@@ -41,7 +41,7 @@ if (document.querySelector('#app1')) {
             international_piesa: '',
             international_trupa: '',
             international_titlu: '',
-            international_imagine: '',
+            international_imagine: internationalImagineInitiala,
             international_descriere: '',
             international_link_youtube: '',
             international_link_interviu: '',
@@ -49,11 +49,13 @@ if (document.querySelector('#app1')) {
             romanesc_piesa: '',
             romanesc_trupa: '',
             romanesc_titlu: '',
-            romanesc_imagine: '',
+            romanesc_imagine: romanescImagineInitiala,
             romanesc_descriere: '',
             romanesc_link_youtube: '',
             romanesc_link_interviu: '',
             romanesc_magazin_virtual: '',
+
+            top_incarcat: '',
 
             top_international_bg_color: 'bg-white',
             top_international_text_color: 'text-black',

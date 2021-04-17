@@ -28,7 +28,11 @@
     {{-- Alegere Topuri --}}
     <div class="row justify-content-center">
         <div class="col-md-4 mb-1">
-            <a href="#top_international" class="text-dark btn" @mouseover="schimbaCuloare('top_international_danger')" @mouseleave="schimbaCuloare('top_international_white')">
+            <a href="#top_international" class="text-dark btn"
+                v-on:mouseover="schimbaCuloare('top_international_danger')"
+                v-on:mouseleave="schimbaCuloare('top_international_white')"
+                v-on:click="top_incarcat = 'top_international'"
+                >
                 <div class="row justify-content-center position-relative">
                     <div class="col-12">
                         <div class="text-white text-center mb-2" style="height:150px; background-color:black">
@@ -76,7 +80,11 @@
 
 
         <div class="col-md-4 mb-1">
-            <a href="#top_romanesc" class="text-dark btn" @mouseover="schimbaCuloare('top_romanesc_danger')" @mouseleave="schimbaCuloare('top_romanesc_white')">
+            <a href="#top_romanesc" class="text-dark btn"
+                v-on:mouseover="schimbaCuloare('top_romanesc_danger')"
+                v-on:mouseleave="schimbaCuloare('top_romanesc_white')"
+                v-on:click="top_incarcat = 'top_romanesc'"
+                >
                 <div class="row justify-content-center position-relative">
                     <div class="col-12">
                         <div class="text-white text-center mb-2" style="height:150px; background-color:black">
@@ -123,19 +131,16 @@
         </div>
     </div>
 
-    {{-- Linie despartitoare --}}
-    <div class="row">
-        <div class="col-md-12 mb-4">
-            <hr style="height:5px; color:black; background-color:black">
-        </div>
-    </div>
-
     {{-- Topul International --}}
-    <div id="top_international" class="row justify-content-center">
+    <div v-cloak v-if="top_incarcat == 'top_international'" id="top_international" class="row justify-content-center">
         <div class="col-md-12">
+
+            {{-- Linie despartitoare --}}
+            <hr class="my-5" style="height:5px; color:black; background-color:black">
+
             <div class="mb-2" style="border-radius: 40px 40px 40px 40px;">
 
-                @if ($piese->where('categorie', 'Top International')->first()->artist->imagine ?? null)
+                {{-- @if ($piese->where('categorie', 'Top International')->first()->artist->imagine ?? null)
                     <div class="row">
                         <div class="col-lg-12">
                             <img src="{{
@@ -145,27 +150,40 @@
                                 }}" alt="" width="100%">
                         </div>
                     </div>
-                @endif
+                @endif --}}
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-lg-12 mb-4">
                         <h3 class="text-white py-3 px-5" style="background-color:black">
                             Cea mai 9 muzică bună
                         </h3>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- @include ('errors') --}}
 
                 <div class="row px-4">
                     <div class="col-lg-6">
+
+                        <h2 class="py-2 px-3">
+                            <b>Cea mai 9 muzică bună</b>
+                        </h2>
+
                         <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
                         @csrf
 
                             <div class="form-row">
-                                <div class="col-lg-12 pb-2 justify-content-center">
+                                {{-- <div class="col-lg-12 pb-2 justify-content-center">
                                     <h3 class="text-center">Top</h3>
-                                </div>
+                                </div> --}}
+                                <script type="application/javascript">
+                                    internationalImagineInitiala={!!
+                                        json_encode(
+                                            env('APP_URL') .
+                                            $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_cale .
+                                            $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_nume
+                                        ) !!}
+                                </script>
                                 @foreach ($piese->where('categorie', 'Top International') as $piesa)
                                         <div class="col-lg-12">
                                             <div class="form-check">
@@ -303,21 +321,31 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
 
 
 
                 {{-- Despartitor topuri --}}
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-12 mb-4">
                         <hr style="height:5px; color:black; background-color:black">
                     </div>
-                </div>
+                </div> --}}
 
-                {{-- Topul Romanesc --}}
 
-                <div id="top_romanesc"></div>
-                @if ($piese->where('categorie', 'Top Romanesc')->first()->artist->imagine ?? null)
+    {{-- Topul Romanesc --}}
+    <div v-cloak v-if="top_incarcat == 'top_romanesc'" id="top_romanesc" class="row justify-content-center">
+        <div class="col-md-12">
+
+            {{-- Linie despartitoare --}}
+            <hr class="my-5" style="height:5px; color:black; background-color:black">
+
+            <div class="mb-2" style="border-radius: 40px 40px 40px 40px;">
+                <div></div>
+                {{-- @if ($piese->where('categorie', 'Top Romanesc')->first()->artist->imagine ?? null)
                     <div class="row">
                         <div class="col-lg-12">
                             <img src="{{
@@ -327,27 +355,40 @@
                                 }}" alt="" width="100%">
                         </div>
                     </div>
-                @endif
+                @endif --}}
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-lg-12 mb-4">
                         <h3 class="text-white py-3 px-5" style="background-color:black">
                             Românești de azi
                         </h3>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- @include ('errors') --}}
 
                 <div class="row px-4">
                     <div class="col-lg-6">
+
+                        <h2 class="py-2 px-3">
+                            <b>Românești de azi</b>
+                        </h2>
+
                         <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
                         @csrf
 
                             <div class="form-row">
-                                <div class="col-lg-12 pb-2 justify-content-center">
+                                {{-- <div class="col-lg-12 pb-2 justify-content-center">
                                     <h3 class="text-center">Top</h3>
-                                </div>
+                                </div> --}}
+                                <script type="application/javascript">
+                                    romanescImagineInitiala={!!
+                                        json_encode(
+                                            env('APP_URL') .
+                                            $piese->where('categorie', 'Top Romanesc')->first()->artist->imagine->imagine_cale .
+                                            $piese->where('categorie', 'Top Romanesc')->first()->artist->imagine->imagine_nume
+                                        ) !!}
+                                </script>
                                 @foreach ($piese->where('categorie', 'Top Romanesc') as $piesa)
                                         <div class="col-lg-12">
                                             <div class="form-check">
