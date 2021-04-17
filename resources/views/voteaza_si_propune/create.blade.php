@@ -28,8 +28,7 @@
     {{-- Alegere Topuri --}}
     <div class="row justify-content-center">
         <div class="col-md-4 mb-1">
-            {{-- <a href="#top_international" class="text-dark btn" --}}
-            <a href="#" class="text-dark btn"
+            <a href="#top_international" class="text-dark btn"
                 v-on:mouseover="schimbaCuloare('top_international_danger')"
                 v-on:mouseleave="schimbaCuloare('top_international_white')"
                 v-on:click="top_incarcat = 'top_international'"
@@ -81,8 +80,7 @@
 
 
         <div class="col-md-4 mb-1">
-            {{-- <a href="#top_romanesc" class="text-dark btn" --}}
-            <a href="#" class="text-dark btn"
+            <a href="#top_romanesc" class="text-dark btn"
                 v-on:mouseover="schimbaCuloare('top_romanesc_danger')"
                 v-on:mouseleave="schimbaCuloare('top_romanesc_white')"
                 v-on:click="top_incarcat = 'top_romanesc'"
