@@ -194,7 +194,7 @@
                                                         international_imagine = '{{ addslashes(env('APP_URL')) .
                                                             addslashes($piesa->artist->imagine->imagine_cale ?? "") .
                                                             addslashes($piesa->artist->imagine->imagine_nume ?? "") }}';
-                                                        international_descriere = '{{ addslashes($piesa->artist->descriere ?? "") }}';
+                                                        international_descriere = '{{ addslashes(json_encode($piesa->artist->descriere ?? "")) }}';
                                                         international_link_youtube = '{{ addslashes($piesa->link_youtube) }}';
                                                         international_link_interviu = '{{ addslashes($piesa->link_interviu) }}';
                                                         international_magazin_virtual = '{{ addslashes($piesa->artist->magazin_virtual ?? "") }}'
@@ -223,7 +223,7 @@
                                                         international_imagine = '{{ addslashes(env('APP_URL')) .
                                                             addslashes($piesa->artist->imagine->imagine_cale ?? "") .
                                                             addslashes($piesa->artist->imagine->imagine_nume ?? "") }}';
-                                                        international_descriere = '{{ addslashes($piesa->artist->descriere ?? "") }}';
+                                                        international_descriere = '{{ addslashes(json_encode($piesa->artist->descriere ?? "")) }}';
                                                         international_link_youtube = '{{ addslashes($piesa->link_youtube) }}';
                                                         international_link_interviu = '{{ addslashes($piesa->link_interviu) }}';
                                                         international_magazin_virtual = '{{ addslashes($piesa->artist->magazin_virtual ?? "") }}'
@@ -399,7 +399,7 @@
                                                         romanesc_imagine = '{{ addslashes(env('APP_URL')) .
                                                             addslashes($piesa->artist->imagine->imagine_cale ?? "") .
                                                             addslashes($piesa->artist->imagine->imagine_nume ?? "") }}';
-                                                        romanesc_descriere = '{{ addslashes($piesa->artist->descriere ?? "") }}';
+                                                        romanesc_descriere = '{{ addslashes(json_encode($piesa->artist->descriere ?? "")) }}';
                                                         romanesc_link_youtube = '{{ addslashes($piesa->link_youtube) }}';
                                                         romanesc_link_interviu = '{{ addslashes($piesa->link_interviu) }}';
                                                         romanesc_magazin_virtual = '{{ addslashes($piesa->artist->magazin_virtual ?? "") }}'
@@ -428,7 +428,7 @@
                                                         romanesc_imagine = '{{ addslashes(env('APP_URL')) .
                                                             addslashes($piesa->artist->imagine->imagine_cale ?? "") .
                                                             addslashes($piesa->artist->imagine->imagine_nume ?? "") }}';
-                                                        romanesc_descriere = '{{ addslashes($piesa->artist->descriere ?? "") }}';
+                                                        romanesc_descriere = '{{ addslashes(json_encode($piesa->artist->descriere ?? "")) }}';
                                                         romanesc_link_youtube = '{{ addslashes($piesa->link_youtube) }}';
                                                         romanesc_link_interviu = '{{ addslashes($piesa->link_interviu) }}';
                                                         romanesc_magazin_virtual = '{{ addslashes($piesa->artist->magazin_virtual ?? "") }}'
