@@ -37,7 +37,7 @@
                     <div class="col-12">
                         <div class="text-white text-center mb-2" style="height:150px; background-color:black">
                             <h4 class="text-white py-4 px-3" style="background-color:black">
-                                Cea mai 9 muzică bună345
+                                Cea mai 9 muzică bună
                                 <br>
                                 <br>
                                 Top 10
@@ -253,7 +253,7 @@
 
                                 <div class="col-lg-12 mb-3 d-flex justify-content-center">
                                     <button type="submit" class="btn btn-danger border border-dark rounded-pill" name="action" value="top_international_voteaza">
-                                        Votează234
+                                        Votează
                                     </button>
                                 </div>
                             </div>
@@ -295,12 +295,12 @@
                                 <img :src="international_imagine" alt="" width="100%">
                             </div>
                             <div v-cloak class="col-lg-12 mb-2">
-                                    {{  json_decode(@{{ international_descriere }}) }}
+                                    @{{ international_descriere }}
                             </div>
                             <div v-cloak v-if="international_link_youtube !== ''" class="col-lg-6">
                                 <a :href="international_link_youtube" target="_blank">
                                     <h3>
-                                        <i class="fab fa-youtube mr-1"></i>Youtube23456
+                                        <i class="fab fa-youtube mr-1"></i>Youtube
                                     </h3>
                                 </a>
                             </div>
