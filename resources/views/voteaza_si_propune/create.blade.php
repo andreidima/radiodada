@@ -194,14 +194,14 @@
                                                         international_imagine = '{{ addslashes(env('APP_URL')) .
                                                             addslashes($piesa->artist->imagine->imagine_cale ?? "") .
                                                             addslashes($piesa->artist->imagine->imagine_nume ?? "") }}';
-                                                        international_descriere = '{{ addslashes(json_encode($piesa->artist->descriere ?? "")) }}';
+                                                        international_descriere = '{{ json_encode($piesa->artist->descriere ?? "") }}';
                                                         international_link_youtube = '{{ addslashes($piesa->link_youtube) }}';
                                                         international_link_interviu = '{{ addslashes($piesa->link_interviu) }}';
                                                         international_magazin_virtual = '{{ addslashes($piesa->artist->magazin_virtual ?? "") }}'
                                                     "
                                                 >
                                                 <label class="form-check-label" for="top_international_piesa{{ $piesa->id }}">
-                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi }}
+                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi ?? 0 }}
                                                 </label>
                                             </div>
                                         </div>
@@ -223,14 +223,14 @@
                                                         international_imagine = '{{ addslashes(env('APP_URL')) .
                                                             addslashes($piesa->artist->imagine->imagine_cale ?? "") .
                                                             addslashes($piesa->artist->imagine->imagine_nume ?? "") }}';
-                                                        international_descriere = '{{ addslashes(json_encode($piesa->artist->descriere ?? "")) }}';
+                                                        international_descriere = '{{ json_encode($piesa->artist->descriere ?? "") }}';
                                                         international_link_youtube = '{{ addslashes($piesa->link_youtube) }}';
                                                         international_link_interviu = '{{ addslashes($piesa->link_interviu) }}';
                                                         international_magazin_virtual = '{{ addslashes($piesa->artist->magazin_virtual ?? "") }}'
                                                     "
                                                 >
                                                 <label class="form-check-label" for="top_international_piesa{{ $piesa->id }}">
-                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi }}
+                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi ?? 0 }}
                                                 </label>
                                             </div>
                                         </div>
@@ -399,14 +399,14 @@
                                                         romanesc_imagine = '{{ addslashes(env('APP_URL')) .
                                                             addslashes($piesa->artist->imagine->imagine_cale ?? "") .
                                                             addslashes($piesa->artist->imagine->imagine_nume ?? "") }}';
-                                                        romanesc_descriere = '{{ addslashes(json_encode($piesa->artist->descriere ?? "")) }}';
+                                                        romanesc_descriere = '{{ json_encode($piesa->artist->descriere ?? "") }}';
                                                         romanesc_link_youtube = '{{ addslashes($piesa->link_youtube) }}';
                                                         romanesc_link_interviu = '{{ addslashes($piesa->link_interviu) }}';
                                                         romanesc_magazin_virtual = '{{ addslashes($piesa->artist->magazin_virtual ?? "") }}'
                                                     "
                                                 >
                                                 <label class="form-check-label" for="top_romanesc_piesa{{ $piesa->id }}">
-                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi }}
+                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi ?? 0 }}
                                                 </label>
                                             </div>
                                         </div>
@@ -428,14 +428,14 @@
                                                         romanesc_imagine = '{{ addslashes(env('APP_URL')) .
                                                             addslashes($piesa->artist->imagine->imagine_cale ?? "") .
                                                             addslashes($piesa->artist->imagine->imagine_nume ?? "") }}';
-                                                        romanesc_descriere = '{{ addslashes(json_encode($piesa->artist->descriere ?? "")) }}';
+                                                        romanesc_descriere = '{{ json_encode($piesa->artist->descriere ?? "") }}';
                                                         romanesc_link_youtube = '{{ addslashes($piesa->link_youtube) }}';
                                                         romanesc_link_interviu = '{{ addslashes($piesa->link_interviu) }}';
                                                         romanesc_magazin_virtual = '{{ addslashes($piesa->artist->magazin_virtual ?? "") }}'
                                                     "
                                                 >
                                                 <label class="form-check-label" for="top_romanesc_piesa{{ $piesa->id }}">
-                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi }}
+                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi ?? 0 }}
                                                 </label>
                                             </div>
                                         </div>
