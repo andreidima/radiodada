@@ -62,6 +62,7 @@
                                                     $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_nume
                                         }}" alt=""
                                         class="mw-100"
+                                        {{-- height="250px" --}}
                                         >
                                     <br>
                                     {{ $piese->where('categorie', 'Top International')->first()->artist->nume ?? ''}}
