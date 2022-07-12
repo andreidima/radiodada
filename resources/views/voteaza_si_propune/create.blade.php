@@ -47,13 +47,22 @@
                         @if ($piese->where('categorie', 'Top International')->first()->artist->imagine ?? null)
                             <div class="row">
                                 <div class="col-lg-12 text-center">
+                                    {{-- style="height: 250px;
+                                        background-image: url({{
+                                                    env('APP_URL') .
+                                                    $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_cale .
+                                                    $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_nume
+                                            }});
+                                        background-size: contain;
+                                        background-repeat: no-repeat;
+                                        background-position: 50% 50%;"> --}}
                                     <img src="{{
                                                     env('APP_URL') .
                                                     $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_cale .
                                                     $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_nume
                                         }}" alt=""
                                         class="mw-100"
-                                        height="250px"
+                                        {{-- height="250px" --}}
                                         >
                                     <br>
                                     {{ $piese->where('categorie', 'Top International')->first()->artist->nume ?? ''}}
@@ -105,7 +114,7 @@
                                                     $piese->where('categorie', 'Top Romanesc')->first()->artist->imagine->imagine_nume
                                         }}" alt=""
                                         class="mw-100"
-                                        height="250px"
+                                        {{-- height="250px" --}}
                                         >
                                     <br>
                                     {{ $piese->where('categorie', 'Top Romanesc')->first()->artist->nume ?? ''}}
