@@ -210,7 +210,8 @@
                                                     "
                                                 >
                                                 <label class="form-check-label" for="top_international_piesa{{ $piesa->id }}">
-                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi ?? 0 }}
+                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }}
+                                                     {{-- - {{ $piesa->voturi ?? 0 }} --}}
                                                 </label>
                                             </div>
                                         </div>
@@ -239,7 +240,8 @@
                                                     "
                                                 >
                                                 <label class="form-check-label" for="top_international_piesa{{ $piesa->id }}">
-                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi ?? 0 }}
+                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }}
+                                                     {{-- - {{ $piesa->voturi ?? 0 }} --}}
                                                 </label>
                                             </div>
                                         </div>
@@ -415,7 +417,8 @@
                                                     "
                                                 >
                                                 <label class="form-check-label" for="top_romanesc_piesa{{ $piesa->id }}">
-                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi ?? 0 }}
+                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }}
+                                                     {{-- - {{ $piesa->voturi ?? 0 }} --}}
                                                 </label>
                                             </div>
                                         </div>
@@ -444,7 +447,8 @@
                                                     "
                                                 >
                                                 <label class="form-check-label" for="top_romanesc_piesa{{ $piesa->id }}">
-                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }} - {{ $piesa->voturi ?? 0 }}
+                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }}
+                                                     {{-- - {{ $piesa->voturi ?? 0 }} --}}
                                                 </label>
                                             </div>
                                         </div>
