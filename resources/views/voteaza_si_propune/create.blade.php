@@ -38,6 +38,7 @@
 <body style="background-color:white">
 <div class="container" id="app1">
 
+
     {{-- Alegere Topuri --}}
     <div class="row justify-content-center">
         <div class="col-md-4 mb-1">
