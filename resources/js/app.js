@@ -41,7 +41,7 @@ if (document.querySelector('#app1')) {
             international_piesa: '',
             international_trupa: '',
             international_titlu: '',
-            international_imagine: internationalImagineInitiala,
+            international_imagine: typeof internationalImagineInitiala !== 'undefined' ? internationalImagineInitiala : '',
             international_descriere: '',
             international_link_youtube: '',
             international_link_interviu: '',
@@ -49,11 +49,19 @@ if (document.querySelector('#app1')) {
             romanesc_piesa: '',
             romanesc_trupa: '',
             romanesc_titlu: '',
-            romanesc_imagine: romanescImagineInitiala,
+            romanesc_imagine: typeof romanescImagineInitiala !== 'undefined' ? romanescImagineInitiala : '',
             romanesc_descriere: '',
             romanesc_link_youtube: '',
             romanesc_link_interviu: '',
             romanesc_magazin_virtual: '',
+            veche_piesa: '',
+            veche_trupa: '',
+            veche_titlu: '',
+            veche_imagine: typeof vecheImagineInitiala !== 'undefined' ? vecheImagineInitiala : '',
+            veche_descriere: '',
+            veche_link_youtube: '',
+            veche_link_interviu: '',
+            veche_magazin_virtual: '',
 
             top_incarcat: '',
 
@@ -61,7 +69,10 @@ if (document.querySelector('#app1')) {
             top_international_text_color: 'text-black',
 
             top_romanesc_bg_color: 'bg-white',
-            top_romanesc_text_color: 'text-black'
+            top_romanesc_text_color: 'text-black',
+
+            top_veche_bg_color: 'bg-white',
+            top_veche_text_color: 'text-black'
         },
 
 
@@ -79,6 +90,12 @@ if (document.querySelector('#app1')) {
                 } else if (value == "top_romanesc_white") {
                     this.top_romanesc_bg_color = "bg-white";
                     this.top_romanesc_text_color = "text-black";
+                } else if (value == "top_veche_danger") {
+                    this.top_veche_bg_color = "bg-danger";
+                    this.top_veche_text_color = "text-white";
+                } else if (value == "top_veche_white") {
+                    this.top_veche_bg_color = "bg-white";
+                    this.top_veche_text_color = "text-black";
                 }
             }
         }
