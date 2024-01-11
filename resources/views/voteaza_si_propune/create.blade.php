@@ -1,3 +1,16 @@
+{{-- Daca este vreun mesaj de la aplicatie, de succes sau de eroare, se reincarca topul respectiv --}}
+{{-- @if ($errors->first('top_international_piesa') || (session()->has('top_international_votat')) || (session()->has('top_international_votat_deja'))
+    || $errors->first('top_international_propunere') || session()->has('top_international_propus') || session()->has('top_international_propus_deja'))
+    @php $top_incarcat = "top_international"; @endphp
+@elseif ($errors->first('top_romanesc_piesa') || (session()->has('top_romanesc_votat')) || (session()->has('top_romanesc_votat_deja'))
+    || $errors->first('top_romanesc_propunere') || session()->has('top_romanesc_propus') || session()->has('top_romanesc_propus_deja'))
+    @php $top_incarcat = "top_romanesc"; @endphp
+@endif
+<script type="application/javascript">
+    top_incarcat={!! json_encode($top_incarcat ?? '') !!}
+</script> --}}
+
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -25,9 +38,10 @@
 <body style="background-color:white">
 <div class="container" id="app1">
 
+
     {{-- Alegere Topuri --}}
     <div class="row justify-content-center">
-        <div class="col-md-6 mb-1">
+        <div class="col-md-4 mb-1">
             <a href="#top_international" class="text-dark btn"
                 v-on:mouseover="schimbaCuloare('top_international_danger')"
                 v-on:mouseleave="schimbaCuloare('top_international_white')"
@@ -47,22 +61,12 @@
                         @if ($piese->where('categorie', 'Top International')->first()->artist->imagine ?? null)
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    {{-- style="height: 250px;
-                                        background-image: url({{
-                                                    env('APP_URL') .
-                                                    $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_cale .
-                                                    $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_nume
-                                            }});
-                                        background-size: contain;
-                                        background-repeat: no-repeat;
-                                        background-position: 50% 50%;"> --}}
                                     <img src="{{
                                                     env('APP_URL') .
                                                     $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_cale .
                                                     $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_nume
                                         }}" alt=""
                                         class="mw-100"
-                                        {{-- height="250px" --}}
                                         >
                                     <br>
                                     {{ $piese->where('categorie', 'Top International')->first()->artist->nume ?? ''}}
@@ -88,7 +92,7 @@
         </div>
 
 
-        <div class="col-md-6 mb-1">
+        <div class="col-md-4 mb-1">
             <a href="#top_romanesc" class="text-dark btn"
                 v-on:mouseover="schimbaCuloare('top_romanesc_danger')"
                 v-on:mouseleave="schimbaCuloare('top_romanesc_white')"
@@ -114,7 +118,6 @@
                                                     $piese->where('categorie', 'Top Romanesc')->first()->artist->imagine->imagine_nume
                                         }}" alt=""
                                         class="mw-100"
-                                        {{-- height="250px" --}}
                                         >
                                     <br>
                                     {{ $piese->where('categorie', 'Top Romanesc')->first()->artist->nume ?? ''}}
@@ -138,9 +141,148 @@
                 </div>
             </a>
         </div>
+
+        @if($piese->where('categorie', 'Top Cea mai bună muzică veche')->count() > 0)
+        <div class="col-md-4 mb-1">
+            <a href="#top_veche" class="text-dark btn"
+                v-on:mouseover="schimbaCuloare('top_veche_danger')"
+                v-on:mouseleave="schimbaCuloare('top_veche_white')"
+                v-on:click="top_incarcat = 'top_veche'"
+                >
+                <div class="row justify-content-center position-relative">
+                    <div class="col-12">
+                        <div class="text-white text-center mb-2" style="height:150px; background-color:black">
+                            <h4 class="text-white pt-4 pb-5 px-3" style="background-color:black">
+                                Cea mai bună muzică veche
+                                <br>
+                                <br>
+                                Top 10
+                            </h4>
+                        </div>
+
+                        @if ($piese->where('categorie', 'Top Cea mai bună muzică veche')->first()->artist->imagine ?? null)
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <img src="{{
+                                                    env('APP_URL') .
+                                                    $piese->where('categorie', 'Top Cea mai bună muzică veche')->first()->artist->imagine->imagine_cale .
+                                                    $piese->where('categorie', 'Top Cea mai bună muzică veche')->first()->artist->imagine->imagine_nume
+                                        }}" alt=""
+                                        class="mw-100"
+                                        >
+                                    <br>
+                                    {{ $piese->where('categorie', 'Top Cea mai bună muzică veche')->first()->artist->nume ?? ''}}
+                                    -
+                                    {{ $piese->where('categorie', 'Top Cea mai bună muzică veche')->first()->nume ?? ''}}
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-12 mb-1 position-absolute d-flex justify-content-center align-items-center"
+                        style="top:120px;"
+                        >
+                        <div class="d-flex justify-content-center align-items-center" style="width:70px; height:70px; border-radius: 50px 50px 50px 50px;"
+                            :class="[top_veche_bg_color, top_veche_text_color]"
+                            >
+                            <h3 class="pt-2">
+                                <b>No/1</b>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endif
     </div>
 
-    {{-- Topul International --}}
+    <div class="row">
+        <div class="col-md-12">
+            @if ($errors->first('top_international_piesa'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ $errors->first('top_international_piesa') }}
+                </div>
+            @elseif (session()->has('top_international_votat'))
+                <div class="col-lg-12 px-2 my-2 alert alert-success">
+                    {{ session('top_international_votat') }}
+                </div>
+            @elseif (session()->has('top_international_votat_deja'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ session('top_international_votat_deja') }}
+                </div>
+            @endif
+
+            @if ($errors->first('top_international_propunere'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ $errors->first('top_international_propunere') }}
+                </div>
+            @elseif (session()->has('top_international_propus'))
+                <div class="col-lg-12 px-2 my-2 alert alert-success">
+                    {{ session('top_international_propus') }}
+                </div>
+            @elseif (session()->has('top_international_propus_deja'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ session('top_international_propus_deja') }}
+                </div>
+            @endif
+
+            @if ($errors->first('top_romanesc_piesa'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ $errors->first('top_romanesc_piesa') }}
+                </div>
+            @elseif (session()->has('top_romanesc_votat'))
+                <div class="col-lg-12 px-2 my-2 alert alert-success">
+                    {{ session('top_romanesc_votat') }}
+                </div>
+            @elseif (session()->has('top_romanesc_votat_deja'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ session('top_romanesc_votat_deja') }}
+                </div>
+            @endif
+
+            @if ($errors->first('top_romanesc_propunere'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ $errors->first('top_romanesc_propunere') }}
+                </div>
+            @elseif (session()->has('top_romanesc_propus'))
+                <div class="col-lg-12 px-2 my-2 alert alert-success">
+                    {{ session('top_romanesc_propus') }}
+                </div>
+            @elseif (session()->has('top_romanesc_propus_deja'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ session('top_romanesc_propus_deja') }}
+                </div>
+            @endif
+
+            @if ($errors->first('top_veche_piesa'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ $errors->first('top_veche_piesa') }}
+                </div>
+            @elseif (session()->has('top_veche_votat'))
+                <div class="col-lg-12 px-2 my-2 alert alert-success">
+                    {{ session('top_veche_votat') }}
+                </div>
+            @elseif (session()->has('top_veche_votat_deja'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ session('top_veche_votat_deja') }}
+                </div>
+            @endif
+
+            @if ($errors->first('top_veche_propunere'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ $errors->first('top_veche_propunere') }}
+                </div>
+            @elseif (session()->has('top_veche_propus'))
+                <div class="col-lg-12 px-2 my-2 alert alert-success">
+                    {{ session('top_veche_propus') }}
+                </div>
+            @elseif (session()->has('top_veche_propus_deja'))
+                <div class="col-lg-12 px-2 my-2 alert alert-danger">
+                    {{ session('top_veche_propus_deja') }}
+                </div>
+            @endif
+        </div>
+    </div>
+
     <div v-cloak v-if="top_incarcat == 'top_international'" id="top_international" class="row justify-content-center">
         <div class="col-md-12">
 
@@ -148,26 +290,6 @@
             <hr class="my-5" style="height:5px; color:black; background-color:black">
 
             <div class="mb-2" style="border-radius: 40px 40px 40px 40px;">
-
-                {{-- @if ($piese->where('categorie', 'Top International')->first()->artist->imagine ?? null)
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <img src="{{
-                                            env('APP_URL') .
-                                            $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_cale .
-                                            $piese->where('categorie', 'Top International')->first()->artist->imagine->imagine_nume
-                                }}" alt="" width="100%">
-                        </div>
-                    </div>
-                @endif --}}
-
-                {{-- <div class="row">
-                    <div class="col-lg-12 mb-4">
-                        <h3 class="text-white py-3 px-5" style="background-color:black">
-                            Cea mai 9 muzică bună
-                        </h3>
-                    </div>
-                </div> --}}
 
                 {{-- @include ('errors') --}}
 
@@ -182,9 +304,6 @@
                         @csrf
 
                             <div class="form-row">
-                                {{-- <div class="col-lg-12 pb-2 justify-content-center">
-                                    <h3 class="text-center">Top</h3>
-                                </div> --}}
                                 <script type="application/javascript">
                                     internationalImagineInitiala={!!
                                         json_encode(
@@ -211,7 +330,6 @@
                                                 >
                                                 <label class="form-check-label" for="top_international_piesa{{ $piesa->id }}">
                                                     {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }}
-                                                     {{-- - {{ $piesa->voturi ?? 0 }} --}}
                                                 </label>
                                             </div>
                                         </div>
@@ -241,26 +359,12 @@
                                                 >
                                                 <label class="form-check-label" for="top_international_piesa{{ $piesa->id }}">
                                                     {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }}
-                                                     {{-- - {{ $piesa->voturi ?? 0 }} --}}
                                                 </label>
                                             </div>
                                         </div>
                                 @endforeach
 
 
-                                @if ($errors->first('top_international_piesa'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-danger">
-                                        {{ $errors->first('top_international_piesa') }}
-                                    </div>
-                                @elseif (session()->has('top_international_votat'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-success">
-                                        {{ session('top_international_votat') }}
-                                    </div>
-                                @elseif (session()->has('top_international_votat_deja'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-danger">
-                                        {{ session('top_international_votat_deja') }}
-                                    </div>
-                                @endif
 
                                 <div class="col-lg-12 mb-3 d-flex justify-content-center">
                                     <button type="submit" class="btn btn-danger border border-dark rounded-pill" name="action" value="top_international_voteaza">
@@ -279,20 +383,6 @@
                                     </label>
                                     <input type="text" class="form-control"  name="top_international_propunere" id="top_international_propunere" aria-describedby="top_international_propunere">
                                 </div>
-
-                                @if ($errors->first('top_international_propunere'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-danger">
-                                        {{ $errors->first('top_international_propunere') }}
-                                    </div>
-                                @elseif (session()->has('top_international_propus'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-success">
-                                        {{ session('top_international_propus') }}
-                                    </div>
-                                @elseif (session()->has('top_international_propus_deja'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-danger">
-                                        {{ session('top_international_propus_deja') }}
-                                    </div>
-                                @endif
 
                                 <div class="col-lg-12 mb-3 py-3 d-flex justify-content-center">
                                     <button type="submit" class="btn btn-danger border border-dark rounded-pill"  name="action" value="top_international_propunere">Propune</button>
@@ -338,15 +428,6 @@
 
 
 
-
-                {{-- Despartitor topuri --}}
-                {{-- <div class="row">
-                    <div class="col-md-12 mb-4">
-                        <hr style="height:5px; color:black; background-color:black">
-                    </div>
-                </div> --}}
-
-
     {{-- Topul Romanesc --}}
     <div v-cloak v-if="top_incarcat == 'top_romanesc'" id="top_romanesc" class="row justify-content-center">
         <div class="col-md-12">
@@ -356,27 +437,6 @@
 
             <div class="mb-2" style="border-radius: 40px 40px 40px 40px;">
                 <div></div>
-                {{-- @if ($piese->where('categorie', 'Top Romanesc')->first()->artist->imagine ?? null)
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <img src="{{
-                                            env('APP_URL') .
-                                            $piese->where('categorie', 'Top Romanesc')->first()->artist->imagine->imagine_cale .
-                                            $piese->where('categorie', 'Top Romanesc')->first()->artist->imagine->imagine_nume
-                                }}" alt="" width="100%">
-                        </div>
-                    </div>
-                @endif --}}
-
-                {{-- <div class="row">
-                    <div class="col-lg-12 mb-4">
-                        <h3 class="text-white py-3 px-5" style="background-color:black">
-                            Românești de azi
-                        </h3>
-                    </div>
-                </div> --}}
-
-                {{-- @include ('errors') --}}
 
                 <div class="row px-4">
                     <div class="col-lg-6">
@@ -389,9 +449,6 @@
                         @csrf
 
                             <div class="form-row">
-                                {{-- <div class="col-lg-12 pb-2 justify-content-center">
-                                    <h3 class="text-center">Top</h3>
-                                </div> --}}
                                 <script type="application/javascript">
                                     romanescImagineInitiala={!!
                                         json_encode(
@@ -454,21 +511,6 @@
                                         </div>
                                 @endforeach
 
-
-                                @if ($errors->first('top_romanesc_piesa'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-danger">
-                                        {{ $errors->first('top_romanesc_piesa') }}
-                                    </div>
-                                @elseif (session()->has('top_romanesc_votat'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-success">
-                                        {{ session('top_romanesc_votat') }}
-                                    </div>
-                                @elseif (session()->has('top_romanesc_votat_deja'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-danger">
-                                        {{ session('top_romanesc_votat_deja') }}
-                                    </div>
-                                @endif
-
                                 <div class="col-lg-12 mb-3 d-flex justify-content-center">
                                     <button type="submit" class="btn btn-danger border border-dark rounded-pill" name="action" value="top_romanesc_voteaza">
                                         Votează
@@ -486,20 +528,6 @@
                                     </label>
                                     <input type="text" class="form-control"  name="top_romanesc_propunere" id="top_romanesc_propunere" aria-describedby="top_romanesc_propunere">
                                 </div>
-
-                                @if ($errors->first('top_romanesc_propunere'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-danger">
-                                        {{ $errors->first('top_romanesc_propunere') }}
-                                    </div>
-                                @elseif (session()->has('top_romanesc_propus'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-success">
-                                        {{ session('top_romanesc_propus') }}
-                                    </div>
-                                @elseif (session()->has('top_romanesc_propus_deja'))
-                                    <div class="col-lg-12 px-2 my-2 alert alert-danger">
-                                        {{ session('top_romanesc_propus_deja') }}
-                                    </div>
-                                @endif
 
                                 <div class="col-lg-12 mb-3 py-3 d-flex justify-content-center">
                                     <button type="submit" class="btn btn-danger border border-dark rounded-pill"  name="action" value="top_romanesc_propunere">Propune</button>
@@ -544,6 +572,154 @@
             </div>
         </div>
     </div>
+
+
+    {{-- Topul Veche --}}
+    @if($piese->where('categorie', 'Top Cea mai bună muzică veche')->count() > 0)
+    <div v-cloak v-if="top_incarcat == 'top_veche'" id="top_veche" class="row justify-content-center">
+        <div class="col-md-12">
+
+            {{-- Linie despartitoare --}}
+            <hr class="my-5" style="height:5px; color:black; background-color:black">
+
+            <div class="mb-2" style="border-radius: 40px 40px 40px 40px;">
+                <div></div>
+
+                <div class="row px-4">
+                    <div class="col-lg-6">
+
+                        <h2 class="py-2 px-3">
+                            <b>Cea mai bună muzică veche</b>
+                        </h2>
+
+                        <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
+                        @csrf
+
+                            <div class="form-row">
+                                <script type="application/javascript">
+                                    vecheImagineInitiala={!!
+                                        json_encode(
+                                            env('APP_URL') .
+                                            $piese->where('categorie', 'Top Cea mai bună muzică veche')->first()->artist->imagine->imagine_cale .
+                                            $piese->where('categorie', 'Top Cea mai bună muzică veche')->first()->artist->imagine->imagine_nume
+                                        ) !!}
+                                </script>
+                                @foreach ($piese->where('categorie', 'Top Cea mai bună muzică veche') as $piesa)
+                                        <div class="col-lg-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="top_veche_piesa" id="top_veche_piesa{{ $piesa->id }}" value="{{ $piesa->id }}"
+                                                    v-on:click="
+                                                        veche_trupa = '{{ addslashes($piesa->artist->nume ?? "") }}';
+                                                        veche_titlu = '{{ addslashes($piesa->nume) }}';
+                                                        veche_imagine = '{{ addslashes(env('APP_URL')) .
+                                                            addslashes($piesa->artist->imagine->imagine_cale ?? "") .
+                                                            addslashes($piesa->artist->imagine->imagine_nume ?? "") }}';
+                                                        veche_descriere = {{ json_encode($piesa->artist->descriere ?? "") }};
+                                                        veche_link_youtube = '{{ addslashes($piesa->link_youtube) }}';
+                                                        veche_link_interviu = '{{ addslashes($piesa->link_interviu) }}';
+                                                        veche_magazin_virtual = '{{ addslashes($piesa->artist->magazin_virtual ?? "") }}'
+                                                    "
+                                                >
+                                                <label class="form-check-label" for="top_veche_piesa{{ $piesa->id }}">
+                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }}
+                                                     {{-- - {{ $piesa->voturi ?? 0 }} --}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                @endforeach
+
+                                @foreach ($piese->where('categorie', 'Propunere Top Cea mai bună muzică veche') as $piesa)
+                                    @if ($loop->first)
+                                        <div class="col-lg-12 py-4 justify-content-center">
+                                            <p class="py-2"></p>
+                                            <h3 class="text-center">Propuneri</h3>
+                                        </div>
+                                    @endif
+                                        <div class="col-lg-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="top_veche_piesa" id="top_veche_piesa{{ $piesa->id }}" value="{{ $piesa->id }}"
+                                                    v-on:click="
+                                                        veche_trupa = '{{ addslashes($piesa->artist->nume ?? "") }}';
+                                                        veche_titlu = '{{ addslashes($piesa->nume) }}';
+                                                        veche_imagine = '{{ addslashes(env('APP_URL')) .
+                                                            addslashes($piesa->artist->imagine->imagine_cale ?? "") .
+                                                            addslashes($piesa->artist->imagine->imagine_nume ?? "") }}';
+                                                        veche_descriere = {{ json_encode($piesa->artist->descriere ?? "") }};
+                                                        veche_link_youtube = '{{ addslashes($piesa->link_youtube) }}';
+                                                        veche_link_interviu = '{{ addslashes($piesa->link_interviu) }}';
+                                                        veche_magazin_virtual = '{{ addslashes($piesa->artist->magazin_virtual ?? "") }}'
+                                                    "
+                                                >
+                                                <label class="form-check-label" for="top_veche_piesa{{ $piesa->id }}">
+                                                    {{ $loop->iteration }}. {{ $piesa->artist->nume ?? "" }} - {{ $piesa->nume }}
+                                                     {{-- - {{ $piesa->voturi ?? 0 }} --}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                @endforeach
+
+                                <div class="col-lg-12 mb-3 d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-danger border border-dark rounded-pill" name="action" value="top_veche_voteaza">
+                                        Votează
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <form class="needs-validation" novalidate method="POST" action="/voteaza-si-propune">
+                        @csrf
+                            <div class="form-row">
+                                <div class="col-lg-12 justify-content-center">
+                                    <label for="top_veche_propunere" class="form-label">
+                                        Adaugă o nouă propunere. Propunerea va intra în lista de mai sus numai după acordul Directorului Muzical
+                                    </label>
+                                    <input type="text" class="form-control"  name="top_veche_propunere" id="top_veche_propunere" aria-describedby="top_veche_propunere">
+                                </div>
+
+                                <div class="col-lg-12 mb-3 py-3 d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-danger border border-dark rounded-pill"  name="action" value="top_veche_propunere">Propune</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-lg-12 mb-2">
+                                <img :src="veche_imagine" alt="" width="100%">
+                            </div>
+                            <div v-cloak class="col-lg-12 mb-2">
+                                    @{{ veche_descriere }}
+                            </div>
+                            <div v-cloak v-if="veche_link_youtube !== ''" class="col-lg-6">
+                                <a :href="veche_link_youtube" target="_blank">
+                                    <h3>
+                                        <i class="fab fa-youtube mr-1"></i>Youtube
+                                    </h3>
+                                </a>
+                            </div>
+                            <div v-cloak v-if="veche_link_interviu !== ''"  class="col-lg-6">
+                                <a :href="veche_link_interviu" target="_blank">
+                                    <h3>
+                                        <i class="fas fa-microphone-alt mr-1"></i>Interviu
+                                    </h3>
+                                </a>
+                            </div>
+                            <div v-cloak v-if="veche_magazin_virtual !== ''"  class="col-lg-12 my-2">
+                                <a :href="veche_magazin_virtual" target="_blank">
+                                    <h3>
+                                        <i class="fas fa-shopping-cart mr-1"></i>Magazin Virtual
+                                    </h3>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    @endif
 
 </div>
 </body>

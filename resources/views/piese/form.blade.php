@@ -55,8 +55,10 @@
                     <option value="">Selectează categorie</option>
                     <option value="Top International" {{ (old('categorie', $piesa->categorie) == "Top International") ? 'selected' : '' }}>Top International</option>
                     <option value="Top Romanesc" {{ (old('categorie', $piesa->categorie) == "Top Romanesc") ? 'selected' : '' }}>Top Romanesc</option>
+                    <option value="Top Cea mai bună muzică veche" {{ (old('categorie', $piesa->categorie) == "Top Cea mai bună muzică veche") ? 'selected' : '' }}>Top Cea mai bună muzică veche</option>
                     <option value="Propunere Top International" {{ (old('categorie', $piesa->categorie) == "Propunere Top International") ? 'selected' : '' }}>Propunere Top International</option>
                     <option value="Propunere Top Romanesc" {{ (old('categorie', $piesa->categorie) == "Propunere Top Romanesc") ? 'selected' : '' }}>Propunere Top Romanesc</option>
+                    <option value="Propunere Top Cea mai bună muzică veche" {{ (old('categorie', $piesa->categorie) == "Propunere Top Cea mai bună muzică veche") ? 'selected' : '' }}>Propunere Cea mai bună muzică veche</option>
                 </select>
             </div>
             <div class="form-group col-lg-12">

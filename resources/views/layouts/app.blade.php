@@ -51,6 +51,10 @@
                                     <a class="nav-link text-dark" href="/piese/categorie/Top Romanesc">
                                         <i class="fas fa-star mr-1"></i>Top Românesc
                                     </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="nav-link text-dark" href="/piese/categorie/Top Cea mai bună muzică veche">
+                                        <i class="fas fa-star mr-1"></i>Top Cea mai bună muzică veche
+                                    </a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown active mr-4">
@@ -64,6 +68,10 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="nav-link text-dark" href="/piese/categorie/Propunere Top Romanesc">
                                         <i class="fas fa-list-alt mr-1"></i>Propuneri Românești
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="nav-link text-dark" href="/piese/categorie/Propunere Top Cea mai bună muzică veche">
+                                        <i class="fas fa-list-alt mr-1"></i>Propuneri Cea mai bună muzică veche
                                     </a>
                                 </div>
                             </li>
